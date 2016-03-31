@@ -5,10 +5,10 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ITHelp_Api;
-using ITHelp_Api.Controllers;
+using ITHelp_Authentication;
+using ITHelp_Authentication.Controllers;
 
-namespace ITHelp_Api.Tests.Controllers
+namespace ITHelp_Authentication.Tests.Controllers
 {
     [TestClass]
     public class ValuesControllerTest
