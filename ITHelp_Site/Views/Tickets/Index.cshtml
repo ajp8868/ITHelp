@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ITHelp_Models.Ticket>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Reference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Raised)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ticket_Status.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ticket_Type.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Needs_Approval)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Required_By)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Raised)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ticket_Status.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ticket_Type.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Needs_Approval)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Required_By)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

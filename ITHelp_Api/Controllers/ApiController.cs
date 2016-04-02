@@ -1,35 +1,27 @@
-﻿using System;
+﻿using ITHelp_Api.Tools;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using System.Web.Mvc;
 
 namespace ITHelp_Api.Controllers
 {
+    [AllowAnonymous]
     public class ApiController : Controller
     {
-        // GET: api/Api
-        public IEnumerable<string> Get()
+
+        // GET: api/Api/5
+        [Route("api/tickets/")]
+        [HttpGet]
+        public ActionResult GetAllTickets()
         {
-            return new string[] { "value1", "value2" };
+            return JsonTools.SuccessfulJson(new ServiceConnector().GetTicketsAsync());
         }
 
         // GET: api/Api/5
-        public string Get(int id)
+        [Route("api/Assets/")]
+        [HttpGet]
+        public ActionResult GetAllAssets()
         {
-            return "value";
-        }
-
-        // POST: api/Api
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Api/5
-        public void Put(int id, [FromBody]string value)
-        {
+            return JsonTools.SuccessfulJson(new ServiceConnector().GetAssetsAsync());
         }
 
         // DELETE: api/Api/5

@@ -14,20 +14,8 @@ namespace ITHelp_Data_Service.Models
     
     public partial class Ticket_Statuses
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ticket_Statuses()
-        {
-            this.Ticket_History = new HashSet<Ticket_History>();
-            this.Tickets = new HashSet<Ticket>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ticket_History> Ticket_History { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

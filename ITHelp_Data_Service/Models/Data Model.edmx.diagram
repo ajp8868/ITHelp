@@ -8,16 +8,16 @@
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Asset_Suppliers" Width="1.5" PointX="3.75" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Asset_Tickets" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Asset" Width="1.5" PointX="6" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FYP.IT_DeskModel.Keyword" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FYP.IT_DeskModel.Knowledge" Width="1.5" PointX="6" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP.IT_DeskModel.Keyword" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP.IT_DeskModel.Knowledge" Width="1.5" PointX="6.875" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Knowledge_Keywords" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_History" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Keywords" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Statuses" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Types" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Urgencies" Width="1.5" PointX="3.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Urgencies" Width="1.5" PointX="2.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FYP.IT_DeskModel.User" Width="1.5" PointX="3.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYP.IT_DeskModel.User" Width="1.5" PointX="4.125" PointY="12.875" IsExpanded="true" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Assets_Asset_Suppliers" ManuallyRouted="false" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Asset_Tickets_Assets" ManuallyRouted="false" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Asset_Tickets_Tickets" ManuallyRouted="false" />
@@ -31,12 +31,15 @@
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Ticket_Statuses" ManuallyRouted="false" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Ticket_Types" ManuallyRouted="false" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Ticket_Urgencies" ManuallyRouted="false" />
-        <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Users1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Asset_Types" Width="1.5" PointX="8.875" PointY="18.875" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Location" Width="1.5" PointX="6" PointY="15.375" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK__Assets__Type_Id__5FB337D6" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK__Assets__Location__60A75C0F" />
+        <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Users" Width="1.5" PointX="4.125" PointY="10" />
+        <AssociationConnector Association="FYP.IT_DeskModel.UserTicket_Users" />
+        <AssociationConnector Association="FYP.IT_DeskModel.TicketTicket_Users" />
+        <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Users" />
+        <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Users1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

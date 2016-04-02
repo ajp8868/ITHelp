@@ -14,12 +14,6 @@ namespace ITHelp_Data_Service.Models
     
     public partial class Asset_Suppliers
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Asset_Suppliers()
-        {
-            this.Assets = new HashSet<Asset>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -27,8 +21,5 @@ namespace ITHelp_Data_Service.Models
         public string Address_Line_1 { get; set; }
         public string Address_Line_2 { get; set; }
         public string Postcode { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Asset> Assets { get; set; }
     }
 }

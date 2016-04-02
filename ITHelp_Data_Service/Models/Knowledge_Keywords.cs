@@ -19,6 +19,5 @@ namespace ITHelp_Data_Service.Models
         public int Id { get; set; }
     
         public virtual Keyword Keyword { get; set; }
-        public virtual Knowledge Knowledge { get; set; }
     }
 }

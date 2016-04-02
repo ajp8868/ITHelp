@@ -40,5 +40,6 @@ namespace ITHelp_Data_Service.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Asset_Types> Asset_Types { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
+        public virtual DbSet<Ticket_Users> Ticket_Users { get; set; }
     }
 }

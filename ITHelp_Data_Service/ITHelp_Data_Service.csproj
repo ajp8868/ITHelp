@@ -252,6 +252,9 @@
     <Compile Include="Models\Ticket_Urgencies.cs">
       <DependentUpon>Data Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ticket_Users.cs">
+      <DependentUpon>Data Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>Data Model.tt</DependentUpon>
     </Compile>

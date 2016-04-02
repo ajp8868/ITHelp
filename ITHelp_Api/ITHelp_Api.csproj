@@ -16,8 +16,9 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44302</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
@@ -187,23 +188,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Asset.cs" />
-    <Compile Include="Models\Asset_Suppliers.cs" />
-    <Compile Include="Models\Asset_Tickets.cs" />
-    <Compile Include="Models\Asset_Types.cs" />
-    <Compile Include="Models\ITHelpModels.cs" />
-    <Compile Include="Models\Keyword.cs" />
-    <Compile Include="Models\Knowledge.cs" />
-    <Compile Include="Models\Knowledge_Keywords.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\Ticket.cs" />
-    <Compile Include="Models\Ticket_History.cs" />
-    <Compile Include="Models\Ticket_Keywords.cs" />
-    <Compile Include="Models\Ticket_Statuses.cs" />
-    <Compile Include="Models\Ticket_Types.cs" />
-    <Compile Include="Models\Ticket_Urgencies.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceConnector.cs" />
+    <Compile Include="Tools\JsonTools.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -309,9 +296,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ITHelp_Models\ITHelp_Models.csproj">
+      <Project>{bfc574ac-3be0-4ef0-8d64-7b92ebffc1e0}</Project>
+      <Name>ITHelp_Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
