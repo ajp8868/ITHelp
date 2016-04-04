@@ -533,8 +533,8 @@
           <Property Name="Updated_By" Type="Int32" Nullable="false" />
           <Property Name="Updated_On" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Urgency_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Ticket_Statuses" Relationship="Self.FK_Ticket_History_Ticket_Statuses" FromRole="Ticket_History" ToRole="Ticket_Statuses" />
-          <NavigationProperty Name="Ticket_Urgencies" Relationship="Self.FK_Ticket_History_Ticket_Urgencies" FromRole="Ticket_History" ToRole="Ticket_Urgencies" />
+          <NavigationProperty Name="Ticket_Status" Relationship="Self.FK_Ticket_History_Ticket_Statuses" FromRole="Ticket_History" ToRole="Ticket_Statuses" />
+          <NavigationProperty Name="Ticket_Urgency" Relationship="Self.FK_Ticket_History_Ticket_Urgencies" FromRole="Ticket_History" ToRole="Ticket_Urgencies" />
         </EntityType>
         <EntityType Name="Ticket_Keywords">
           <Key>
@@ -588,11 +588,11 @@
           <Property Name="Required_By" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Ticket_History" Relationship="Self.FK_Ticket_History_Tickets" FromRole="Tickets" ToRole="Ticket_History" />
           <NavigationProperty Name="Ticket_Keywords" Relationship="Self.FK_Ticket_Keywords_Tickets" FromRole="Tickets" ToRole="Ticket_Keywords" />
-          <NavigationProperty Name="Ticket_Statuses" Relationship="Self.FK_Tickets_Ticket_Statuses" FromRole="Tickets" ToRole="Ticket_Statuses" />
-          <NavigationProperty Name="Ticket_Types" Relationship="Self.FK_Tickets_Ticket_Types" FromRole="Tickets" ToRole="Ticket_Types" />
-          <NavigationProperty Name="Ticket_Urgencies" Relationship="Self.FK_Tickets_Ticket_Urgencies" FromRole="Tickets" ToRole="Ticket_Urgencies" />
-          <NavigationProperty Name="User" Relationship="FYP.IT_DeskModel.FK_Tickets_Users" FromRole="Ticket" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="FYP.IT_DeskModel.FK_Tickets_Users1" FromRole="Ticket" ToRole="User" />
+          <NavigationProperty Name="Ticket_Status" Relationship="Self.FK_Tickets_Ticket_Statuses" FromRole="Tickets" ToRole="Ticket_Statuses" />
+          <NavigationProperty Name="Ticket_Type" Relationship="Self.FK_Tickets_Ticket_Types" FromRole="Tickets" ToRole="Ticket_Types" />
+          <NavigationProperty Name="Ticket_Urgency" Relationship="Self.FK_Tickets_Ticket_Urgencies" FromRole="Tickets" ToRole="Ticket_Urgencies" />
+          <NavigationProperty Name="User_Approve" Relationship="FYP.IT_DeskModel.FK_Tickets_Users" FromRole="Ticket" ToRole="User" />
+          <NavigationProperty Name="User_Raised" Relationship="FYP.IT_DeskModel.FK_Tickets_Users1" FromRole="Ticket" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>

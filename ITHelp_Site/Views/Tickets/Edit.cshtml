@@ -4,6 +4,15 @@
     ViewBag.Title = "Edit";
 }
 
+@if (Roles.IsUserInRole("admin"))
+{
+    <span> Welcome <b>@WebSecurity.CurrentUserName</b>! </span>
+}
+else
+{
+    Response.Redirect("~/AdminError");
+}
+
 <h2>Edit</h2>
 
 

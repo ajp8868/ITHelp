@@ -12,7 +12,7 @@ using ITHelp_Data_Service.Models;
 
 namespace ITHelp_Data_Service.Controllers
 {
-    public class KnowledgesController : ApiController
+    public class KnowledgeController : ApiController
     {
         private Entities db = new Entities();
 

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ITHelp_Models.Ticket>
+
+    @section Styles {
+        <link href="@Url.Content("~/Content/Tickets.css")" rel="stylesheet" type="text/css" />
+    }
+
+    @{
+        ViewBag.Title = "All Tickets";
+    }
+
+    <h2>All Tickets</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn_create" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Reference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Raised)
+            </th>
+            <th>
+                @Html.DisplayName("Status")
+            </th>
+            <th>
+                @Html.DisplayName("Type")
+            </th>
+            <th>
+                @Html.DisplayName("Needs Approval")
+            </th>
+            <th>
+                @Html.DisplayName("Required By")
+            </th>
+            <th>
+                @Html.DisplayName("Actions")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reference)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Raised)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ticket_Status.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ticket_Type.Name)
+                </td>
+                <td>
+                    @(item.Needs_Approval ? "Yes" : "No")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Required_By)
+                </td>
+                <td class="end_row">
+                    @Html.ActionLink("Details", "details", new { id = item.Id }, new { @class = "btn btn_details" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
+                </td>
+            </tr>
+        }
+
+    </table>

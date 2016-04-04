@@ -23,7 +23,7 @@ namespace ITHelp_Data_Service.Models
         public System.DateTime Updated_On { get; set; }
         public int Urgency_Id { get; set; }
     
-        public virtual Ticket_Statuses Ticket_Statuses { get; set; }
-        public virtual Ticket_Urgencies Ticket_Urgencies { get; set; }
+        public virtual Ticket_Statuses Ticket_Status { get; set; }
+        public virtual Ticket_Urgencies Ticket_Urgency { get; set; }
     }
 }

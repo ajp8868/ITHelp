@@ -42,7 +42,7 @@ namespace ITHelp_Models
         public virtual Ticket_Statuses Ticket_Status { get; set; }
         public virtual Ticket_Types Ticket_Type { get; set; }
         public virtual Ticket_Urgencies Ticket_Urgency { get; set; }
-        public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
+        public virtual User User_Approve { get; set; }
+        public virtual User User_Raised { get; set; }
     }
 }

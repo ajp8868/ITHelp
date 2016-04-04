@@ -33,11 +33,31 @@ namespace ITHelp_Site.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public ActionResult Login(User model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && WebSecurity.Login(model.User_Name, model.Password, false))
             {
-                return RedirectToLocal(returnUrl);
+                if (returnUrl.Contains("tickets"))
+                {
+                    var userRoles = Roles.GetRolesForUser(model.User_Name);
+
+                    if (userRoles.Contains("admin"))
+                    {
+                        return RedirectToLocal("/admin");
+                    }
+                    else if (userRoles.Contains("viewer"))
+                    {
+                        return RedirectToLocal("public");
+                    }
+                    else
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+                }
+                else
+                {
+                    return RedirectToLocal(returnUrl);
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -72,20 +92,45 @@ namespace ITHelp_Site.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(User model)
         {
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                try
-                {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                model.Admin = false;
+                model.Enabled = true;
+                model.User_Group = "viewer";
+
+                try {
+                    model.User_Name = model.Name.Substring(0,1);
+                    model.User_Name = model.User_Name + model.Name.Split()[1];
                 }
-                catch (MembershipCreateUserException e)
+                catch 
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    model.User_Name = model.Name;
+                }
+
+                var sc = new ServiceConnector();
+
+                var res = sc.PostUserAsync(model);
+
+                if (res.Result.IsSuccessStatusCode)
+                {
+
+                    try
+                    {
+                        WebSecurity.CreateUserAndAccount(model.User_Name, model.Password);
+                        WebSecurity.Login(model.User_Name, model.Password);
+                        return RedirectToAction("Tickets", "Public");
+                    }
+                    catch (MembershipCreateUserException e)
+                    {
+                        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
                 }
             }
 

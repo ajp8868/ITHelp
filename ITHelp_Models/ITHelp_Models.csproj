@@ -130,6 +130,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Data Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data Model.edmx</DependentUpon>
+    </Compile>
     <Compile Include="ITHelpModels.cs" />
     <Compile Include="Keyword.cs">
       <DependentUpon>Data Model.tt</DependentUpon>

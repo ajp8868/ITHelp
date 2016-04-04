@@ -31,9 +31,15 @@ a {
         background-color: #c7d1d6;
     }
 
-header, footer, hgroup,
+footer, hgroup,
 nav, section {
     display: block;
+}
+
+header {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
 }
 
 mark {
@@ -43,11 +49,35 @@ mark {
 }
 
 .float-left {
-    float: left;
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+footer .float-left {
+    display: inline-block;
+    position: relative;
+}
+
+.float-middle {
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+}
+
+.float-middle nav {
+    left: -50%;
+    display: inline-block;
+    position:relative;
 }
 
 .float-right {
-    float: right;
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin-top: 10px;
 }
 
 .clear-fix:after {
@@ -70,7 +100,13 @@ h1 {
 }
 
 h2 {
-    font-size: 1.75em;
+    margin-top: 0px;
+    padding-bottom: 5px;
+    font-size: 30px;
+    text-align: center;
+    background: url('../Resources/Images/Network Cables.jpg') left 50% no-repeat;
+    background-size: cover;
+    color: white;
 }
 
 h3 {
@@ -95,19 +131,24 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 960px;
+    max-width: 70%;
+}
+
+#main_logo {
+    max-height: 60px;
 }
 
 #body {
-    background-color: #efeeef;
+    background-color: white;
     clear: both;
     padding-bottom: 35px;
 }
 
     .main-content {
-        background: url("../Images/accent.png") no-repeat;
-        padding-left: 10px;
-        padding-top: 30px;
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+        width: 70%;
     }
 
     .featured + .main-content {
@@ -115,7 +156,12 @@ h5, h6 {
     }
 
 header .content-wrapper {
-    padding-top: 20px; 
+    display: inline-block;
+    position: relative;
+    width: 70%;
+    height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px; 
 }
 
 footer {
@@ -180,7 +226,7 @@ footer {
 /* menu
 ----------------------------------------------------------*/
 ul#menu {
-    font-size: 1.3em;
+    font-size: 25px;
     font-weight: 600;
     margin: 0 0 5px;
     padding: 0;
@@ -190,7 +236,8 @@ ul#menu {
     ul#menu li {
         display: inline;
         list-style: none;
-        padding-left: 15px;
+        padding-left: 7px;
+        padding-right: 7px;
     }
 
         ul#menu li a {
@@ -330,8 +377,6 @@ aside {
 
 /* login page */
 #loginForm {
-    border-right: solid 2px #c8c8c8;
-    float: left;
     width: 55%;
 }
 

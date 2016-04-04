@@ -17,6 +17,8 @@ namespace ITHelp_Models
         public DbSet<UserProfile> UserProfiles { get; set; }
 
         public System.Data.Entity.DbSet<ITHelp_Models.Ticket> Tickets { get; set; }
+
+        public System.Data.Entity.DbSet<ITHelp_Models.User> Users { get; set; }
     }
 
     [Table("UserProfile")]

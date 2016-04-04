@@ -1,2 +1,45 @@
-﻿body {
+﻿.featured .content-wrapper {
+    background: url('../Resources/Images/Network Cables.jpg') left 50% no-repeat;
+    background-size: cover;
+    text-align: center;
+    padding-top: 30px;
+    position: relative;
+    display: inline-block;
+    width: 70%;
+    height: 200px;
+}
+
+.featured {
+    text-align: center;
+}
+
+.featured .title {
+    display: inline-block;
+    font-size: 20px;
+    position: relative;
+    left: -50%;
+}
+
+.title-container {
+    display: inline-block;
+    position: absolute;
+    top: 35%;
+}
+
+.featured + .main-content {
+    background: none !important;
+    text-align: center;
+    display: inline-block !important;  
+    margin: 0 auto;
+    position: relative;
+}
+
+#loginForm {
+    margin: 0 auto;
+    position: relative;
+    display: inline-block;
+}
+
+body {
+    text-align: center;
 }

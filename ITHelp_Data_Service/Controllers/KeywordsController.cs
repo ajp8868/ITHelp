@@ -12,44 +12,44 @@ using ITHelp_Data_Service.Models;
 
 namespace ITHelp_Data_Service.Controllers
 {
-    public class Asset_SuppliersController : ApiController
+    public class KeywordsController : ApiController
     {
         private Entities db = new Entities();
 
-        // GET: api/Asset_Suppliers
-        public IQueryable<Asset_Suppliers> GetAsset_Suppliers()
+        // GET: api/Keywords
+        public IQueryable<Keyword> GetKeywords()
         {
-            return db.Asset_Suppliers;
+            return db.Keywords;
         }
 
-        // GET: api/Asset_Suppliers/5
-        [ResponseType(typeof(Asset_Suppliers))]
-        public IHttpActionResult GetAsset_Suppliers(int id)
+        // GET: api/Keywords/5
+        [ResponseType(typeof(Keyword))]
+        public IHttpActionResult GetKeyword(int id)
         {
-            Asset_Suppliers asset_Suppliers = db.Asset_Suppliers.Find(id);
-            if (asset_Suppliers == null)
+            Keyword keyword = db.Keywords.Find(id);
+            if (keyword == null)
             {
                 return NotFound();
             }
 
-            return Ok(asset_Suppliers);
+            return Ok(keyword);
         }
 
-        // PUT: api/Asset_Suppliers/5
+        // PUT: api/Keywords/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAsset_Suppliers(int id, Asset_Suppliers asset_Suppliers)
+        public IHttpActionResult PutKeyword(int id, Keyword keyword)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != asset_Suppliers.Id)
+            if (id != keyword.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(asset_Suppliers).State = EntityState.Modified;
+            db.Entry(keyword).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace ITHelp_Data_Service.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!Asset_SuppliersExists(id))
+                if (!KeywordExists(id))
                 {
                     return NotFound();
                 }
@@ -70,16 +70,16 @@ namespace ITHelp_Data_Service.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Asset_Suppliers
-        [ResponseType(typeof(Asset_Suppliers))]
-        public IHttpActionResult PostAsset_Suppliers(Asset_Suppliers asset_Suppliers)
+        // POST: api/Keywords
+        [ResponseType(typeof(Keyword))]
+        public IHttpActionResult PostKeyword(Keyword keyword)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Asset_Suppliers.Add(asset_Suppliers);
+            db.Keywords.Add(keyword);
 
             try
             {
@@ -87,7 +87,7 @@ namespace ITHelp_Data_Service.Controllers
             }
             catch (DbUpdateException)
             {
-                if (Asset_SuppliersExists(asset_Suppliers.Id))
+                if (KeywordExists(keyword.Id))
                 {
                     return Conflict();
                 }
@@ -97,23 +97,23 @@ namespace ITHelp_Data_Service.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = asset_Suppliers.Id }, asset_Suppliers);
+            return CreatedAtRoute("DefaultApi", new { id = keyword.Id }, keyword);
         }
 
-        // DELETE: api/Asset_Suppliers/5
-        [ResponseType(typeof(Asset_Suppliers))]
-        public IHttpActionResult DeleteAsset_Suppliers(int id)
+        // DELETE: api/Keywords/5
+        [ResponseType(typeof(Keyword))]
+        public IHttpActionResult DeleteKeyword(int id)
         {
-            Asset_Suppliers asset_Suppliers = db.Asset_Suppliers.Find(id);
-            if (asset_Suppliers == null)
+            Keyword keyword = db.Keywords.Find(id);
+            if (keyword == null)
             {
                 return NotFound();
             }
 
-            db.Asset_Suppliers.Remove(asset_Suppliers);
+            db.Keywords.Remove(keyword);
             db.SaveChanges();
 
-            return Ok(asset_Suppliers);
+            return Ok(keyword);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,9 +125,9 @@ namespace ITHelp_Data_Service.Controllers
             base.Dispose(disposing);
         }
 
-        private bool Asset_SuppliersExists(int id)
+        private bool KeywordExists(int id)
         {
-            return db.Asset_Suppliers.Count(e => e.Id == id) > 0;
+            return db.Keywords.Count(e => e.Id == id) > 0;
         }
     }
 }
