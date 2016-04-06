@@ -120,6 +120,7 @@ namespace ITHelp_Site.Controllers
                     try
                     {
                         WebSecurity.CreateUserAndAccount(model.User_Name, model.Password);
+                        Roles.AddUserToRole(model.User_Name, "viewer");
                         WebSecurity.Login(model.User_Name, model.Password);
                         return RedirectToAction("Tickets", "Public");
                     }

@@ -17,7 +17,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44301</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>92ca11b1</NuGetPackageImportStamp>
@@ -192,6 +192,7 @@
     <Compile Include="Controllers\Ticket_HistoryController.cs" />
     <Compile Include="Controllers\Ticket_StatusesController.cs" />
     <Compile Include="Controllers\Ticket_TypesController.cs" />
+    <Compile Include="Controllers\Ticket_UrgenciesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

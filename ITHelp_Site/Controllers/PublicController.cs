@@ -30,13 +30,14 @@ namespace ITHelp_Site.Controllers
         }
 
         // GET: Public/Details/5
-        public async Task<ActionResult> Details(int? id)
+        [Route("public/tickets/details/{id}")]
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = await db.Tickets.FindAsync(id);
+            Ticket ticket = sc.GetTicketByIdAsync(id);
             if (ticket == null)
             {
                 return HttpNotFound();
@@ -47,6 +48,9 @@ namespace ITHelp_Site.Controllers
         // GET: Public/Create
         public ActionResult Create()
         {
+            ViewData["types"] = sc.GetTickTypes();
+            ViewData["statuses"] = sc.GetTickStatuses();
+            ViewData["urgencies"] = sc.GetTickUrgencies();
             return View();
         }
 
@@ -55,15 +59,22 @@ namespace ITHelp_Site.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Reference,Title,Description,Raised,Status_Id,Completed_On,Urgency_Id,Type_Id,Raised_By,Needs_Approval,Approved_By,Required_By")] Ticket ticket)
+        public async Task<ActionResult> Create([Bind(Include = "Title,Description,Raised,Status_Id,Urgency_Id,Type_Id,Needs_Approval,Required_By")] Ticket ticket)
         {
+            var user = sc.GetUserAsync(WebSecurity.CurrentUserName);
+
+            ticket.Raised_By = user.Id;
+            ticket.User_Raised = user;
+
             if (ModelState.IsValid)
             {
-                db.Tickets.Add(ticket);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                await sc.PostTicketAsync(ticket).ConfigureAwait(false);
+                return RedirectToAction("tickets");
             }
 
+            ViewData["types"] = sc.GetTickTypes();
+            ViewData["statuses"] = sc.GetTickStatuses();
+            ViewData["urgencies"] = sc.GetTickUrgencies();
             return View(ticket);
         }
 

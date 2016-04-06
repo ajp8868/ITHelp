@@ -23,6 +23,10 @@ namespace ITHelp_Site
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            GlobalConfiguration.Configuration.EnsureInitialized();
+            ModelValidatorProviders.Providers.Clear();
+            ModelValidatorProviders.Providers.Add(new DataAnnotationsModelValidatorProvider());
+            DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
         }
     }
 }

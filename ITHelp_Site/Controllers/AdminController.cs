@@ -37,6 +37,7 @@ namespace ITHelp_Site.Controllers
         }
 
         // GET: Tickets/Details/5
+        [Route("admin/tickets/details/{id}")]
         public async Task<ActionResult> Details(int id)
         {
             var ticket = sc.GetTicketByIdAsync(id);

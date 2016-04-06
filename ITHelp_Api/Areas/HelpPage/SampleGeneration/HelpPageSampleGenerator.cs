@@ -35,7 +35,7 @@ namespace ITHelp_Api.Areas.HelpPage
         }
 
         /// <summary>
-        /// Gets CLR types that are used as the content of <see cref="HttpRequestMessage"/> or <see cref="HttpResponseMessage"/>.
+        /// Gets CLR urgencies that are used as the content of <see cref="HttpRequestMessage"/> or <see cref="HttpResponseMessage"/>.
         /// </summary>
         public IDictionary<HelpPageSampleKey, Type> ActualHttpMessageTypes { get; internal set; }
 

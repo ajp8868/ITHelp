@@ -1,5 +1,4 @@
 ﻿@model ITHelp_Models.Ticket
-
     <div>
         <h4>Ticket</h4>
         <hr />
@@ -29,36 +28,35 @@
             </dd>
     
             <dt>
-                @Html.DisplayName("Raised By")
+                @Html.DisplayNameFor(model => model.Raised)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.User_Raised.Name)
+                @Html.DisplayFor(model => model.Raised)
             </dd>
     
             <dt>
-                @Html.DisplayName("Status")
+                @Html.DisplayNameFor(model => model.Status_Id)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Ticket_Status.Name)
+                @Html.DisplayFor(model => model.Status_Id)
             </dd>
-            @*@if (model => model.Ticket_Status.Complete)
-            {*@ 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Completed_On)
-                </dt>
     
-                <dd>
-                    @Html.DisplayFor(model => model.Completed_On)
-                </dd>
-            @*}*@
+            <dt>
+                @Html.DisplayNameFor(model => model.Completed_On)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Completed_On)
+            </dd>
+    
             <dt>
                 @Html.DisplayNameFor(model => model.Urgency_Id)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Ticket_Urgency.Name)
+                @Html.DisplayFor(model => model.Urgency_Id)
             </dd>
     
             <dt>
@@ -66,7 +64,7 @@
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Ticket_Type.Name)
+                @Html.DisplayFor(model => model.Type_Id)
             </dd>
     
             <dt>
@@ -74,7 +72,7 @@
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.User_Raised.Name)
+                @Html.DisplayFor(model => model.Raised_By)
             </dd>
     
             <dt>
@@ -105,5 +103,5 @@
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Tickets")
+        @Html.ActionLink("Back to List", "Index")
     </p>

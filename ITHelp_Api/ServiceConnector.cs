@@ -11,7 +11,8 @@ namespace ITHelp_Api
 {
     public class ServiceConnector
     {
-        private readonly string _baseUrl = "http://ithelpdata.azurewebsites.net/api/";
+        //private readonly string _baseUrl = "http://ithelpdata.azurewebsites.net/api/";
+        private readonly string _baseUrl = "http://localhost:57532/api/";
 
         private string checkUrl(string url)
         {
@@ -120,6 +121,102 @@ namespace ITHelp_Api
         }
 
         //Get all assets from the Repository Service
+        public List<Ticket_Statuses> GetTickStatuses(string statusUrl = "ticket_statuses")
+        {
+
+            checkUrl(statusUrl);
+            var uri = _baseUrl + statusUrl;
+
+            using (var httpClient = new HttpClient())
+            {
+                List<Ticket_Statuses> statuses = null;
+
+                for (var i = 0; i <= 2; i++)
+                {
+                    try
+                    {
+                        statuses = JsonConvert.DeserializeObject<List<Ticket_Statuses>>(
+                            httpClient.GetStringAsync(uri).Result);
+                        Console.Out.WriteLine("Success getting statuses");
+                        i = 3;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Out.WriteLine("Problem Getting statuses. Attempt: " + (i + 1).ToString());
+                    }
+                }
+
+                httpClient.Dispose();
+
+                return statuses;
+            }
+        }
+
+        //Get all assets from the Repository Service
+        public List<Ticket_Types> GetTickTypes(string typesUrl = "ticket_types")
+        {
+
+            checkUrl(typesUrl);
+            var uri = _baseUrl + typesUrl;
+
+            using (var httpClient = new HttpClient())
+            {
+                List<Ticket_Types> types = null;
+
+                for (var i = 0; i <= 2; i++)
+                {
+                    try
+                    {
+                        types = JsonConvert.DeserializeObject<List<Ticket_Types>>(
+                            httpClient.GetStringAsync(uri).Result);
+                        Console.Out.WriteLine("Success getting types");
+                        i = 3;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Out.WriteLine("Problem Getting types. Attempt: " + (i + 1).ToString());
+                    }
+                }
+
+                httpClient.Dispose();
+
+                return types;
+            }
+        }
+
+        //Get all assets from the Repository Service
+        public List<Ticket_Urgencies> GetTickUrgencies(string urgenciesUrl = "ticket_urgencies")
+        {
+
+            checkUrl(urgenciesUrl);
+            var uri = _baseUrl + urgenciesUrl;
+
+            using (var httpClient = new HttpClient())
+            {
+                List<Ticket_Urgencies> urgencies = null;
+
+                for (var i = 0; i <= 2; i++)
+                {
+                    try
+                    {
+                        urgencies = JsonConvert.DeserializeObject<List<Ticket_Urgencies>>(
+                            httpClient.GetStringAsync(uri).Result);
+                        Console.Out.WriteLine("Success getting urgencies");
+                        i = 3;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Out.WriteLine("Problem Getting urgencies. Attempt: " + (i + 1).ToString());
+                    }
+                }
+
+                httpClient.Dispose();
+
+                return urgencies;
+            }
+        }
+
+        //Get all assets from the Repository Service
         public async Task<HttpResponseMessage> PostUserAsync(User user, string usersUrl = "users")
         {
             checkUrl(usersUrl);
@@ -136,6 +233,22 @@ namespace ITHelp_Api
             }
 
             return x;
+        }
+
+        //Get all assets from the Repository Service
+        public async Task<HttpResponseMessage> PostTicketAsync(Ticket ticket, string ticketUrl = "tickets")
+        {
+            checkUrl(ticketUrl);
+
+            var uri = _baseUrl + ticketUrl;
+
+            using (var client = new HttpClient())
+            {
+
+                var x = await client.PostAsJsonAsync(uri, ticket).ConfigureAwait(false);
+
+                return x;
+            }
         }
     }
 }

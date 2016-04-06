@@ -29,7 +29,7 @@ namespace ITHelp_Api.Tools
 
             foreach (User u in users)
             {
-                if (u.User_Name == username)
+                if (u.User_Name.Equals(username, StringComparison.OrdinalIgnoreCase))
                 {
                     toReturn = u;
                 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using WebMatrix.WebData;
 
 namespace ITHelp_Site.Controllers
 {
@@ -13,9 +15,27 @@ namespace ITHelp_Site.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            if (WebSecurity.IsAuthenticated)
+            {
+                var userRoles = Roles.GetRolesForUser(WebSecurity.CurrentUserName);
 
-            return View();
+                if (userRoles.Contains("admin"))
+                {
+                    return RedirectToLocal("/admin");
+                }
+                else if (userRoles.Contains("viewer"))
+                {
+                    return RedirectToLocal("/public");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult About()
@@ -30,6 +50,18 @@ namespace ITHelp_Site.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

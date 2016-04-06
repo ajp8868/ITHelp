@@ -1,5 +1,6 @@
 ﻿using ITHelp_Api.Tools;
 using ITHelp_Models;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Mvc;
@@ -20,6 +21,30 @@ namespace ITHelp_Api.Controllers
         }
 
         // GET: api/Api/5
+        [Route("api/tickets/statuses")]
+        [HttpGet]
+        public ActionResult GetTickStatuses()
+        {
+            return JsonTools.SuccessfulJson(sc.GetTickStatuses());
+        }
+
+        // GET: api/Api/5
+        [Route("api/tickets/types")]
+        [HttpGet]
+        public ActionResult GetTickTypes()
+        {
+            return JsonTools.SuccessfulJson(sc.GetTickTypes());
+        }
+
+        // GET: api/Api/5
+        [Route("api/tickets/urgencies")]
+        [HttpGet]
+        public ActionResult GetTickUrgencies()
+        {
+            return JsonTools.SuccessfulJson(sc.GetTickUrgencies());
+        }
+
+        // GET: api/Api/5
         [Route("api/tickets/{id}/")]
         [HttpGet]
         public ActionResult GetTicketById(int id)
@@ -30,7 +55,7 @@ namespace ITHelp_Api.Controllers
         }
 
         // GET: api/Api/5
-        [Route("api/tickets{username?}/")]
+        [Route("api/tickets/user/{username}/")]
         [HttpGet]
         public ActionResult GetTicketById(string username)
         {
@@ -73,7 +98,26 @@ namespace ITHelp_Api.Controllers
         }
 
         // GET: api/Api/5
-        [Route("api/users{username?}")]
+        [Route("api/user/{username}")]
+        [HttpGet]
+        public ActionResult GetUserByUsername(string username)
+        {
+            var items = sc.GetUsers();
+
+            try
+            {
+                return JsonTools.SuccessfulJson(UserTools.checkByUsername(username, items));
+            }
+            catch (Exception e)
+            {
+                return JsonTools.UnsuccessfulJson(e.ToString());
+            }
+
+            
+        }
+
+        // GET: api/Api/5
+        [Route("api/users{username}")]
         [HttpGet]
         public ActionResult GetUsersById(string username)
         {
@@ -82,12 +126,30 @@ namespace ITHelp_Api.Controllers
             return JsonTools.SuccessfulJson(UserTools.checkByUsername(username, items));
         }
 
-        // POST: api/Api/5
+        // POST: api/urgencies
         [Route("api/users/")]
         [HttpPost]
         public HttpResponseMessage PostUser(User user)
         {
-            return (sc.PostUserAsync(user).Result);
+            return sc.PostUserAsync(user).Result;
+        }
+
+        // POST: api/tickets
+        [Route("api/tickets/")]
+        [HttpPost]
+        public HttpResponseMessage PostTicket(Ticket ticket)
+        {
+            if (ticket.Title.Length > 4)
+            {
+                ticket.Reference = DateTime.Now.ToString("ddMMyyyy-mmss") + ticket.Title.Substring(0, 5);
+            }
+            else
+            {
+                ticket.Reference = DateTime.Now.ToString("ddMMyyyy-mmss") + ticket.Title;
+            }
+            ticket.Raised = DateTime.Now;
+
+            return sc.PostTicketAsync(ticket).Result;
         }
     }
 }

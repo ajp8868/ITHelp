@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 namespace ITHelp_Api.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
-    /// Generates model descriptions for given types.
+    /// Generates model descriptions for given urgencies.
     /// </summary>
     public class ModelDescriptionGenerator
     {

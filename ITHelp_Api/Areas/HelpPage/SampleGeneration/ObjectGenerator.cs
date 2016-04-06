@@ -17,11 +17,11 @@ namespace ITHelp_Api.Areas.HelpPage
         private readonly SimpleTypeObjectGenerator SimpleObjectGenerator = new SimpleTypeObjectGenerator();
 
         /// <summary>
-        /// Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
-        /// Simple types: <see cref="int"/>, <see cref="string"/>, <see cref="Enum"/>, <see cref="DateTime"/>, <see cref="Uri"/>, etc.
-        /// Complex types: POCO types.
+        /// Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following urgencies:
+        /// Simple urgencies: <see cref="int"/>, <see cref="string"/>, <see cref="Enum"/>, <see cref="DateTime"/>, <see cref="Uri"/>, etc.
+        /// Complex urgencies: POCO urgencies.
         /// Nullables: <see cref="Nullable{T}"/>.
-        /// Arrays: arrays of simple types or complex types.
+        /// Arrays: arrays of simple urgencies or complex urgencies.
         /// Key value pairs: <see cref="KeyValuePair{TKey,TValue}"/>
         /// Tuples: <see cref="Tuple{T1}"/>, <see cref="Tuple{T1,T2}"/>, etc
         /// Dictionaries: <see cref="IDictionary{TKey,TValue}"/> or anything deriving from <see cref="IDictionary{TKey,TValue}"/>.

@@ -23,15 +23,15 @@ namespace ITHelp_Api.Tools
             return toReturn;
         }
 
-        public static Ticket checkByUser(string user, List<Ticket> tickets)
+        public static List<Ticket> checkByUser(string user, List<Ticket> tickets)
         {
-            Ticket toReturn = null;
+            List<Ticket> toReturn = new List<Ticket>();
 
             foreach (Ticket ti in tickets)
             {
-                if (ti.User_Raised.User_Name == user)
+                if (ti.User_Raised.User_Name.Equals(user, StringComparison.OrdinalIgnoreCase))
                 {
-                    toReturn = ti;
+                    toReturn.Add(ti);
                 }
             }
 

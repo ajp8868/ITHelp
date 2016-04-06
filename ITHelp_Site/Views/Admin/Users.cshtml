@@ -1,17 +1,5 @@
 ﻿@model IEnumerable<ITHelp_Models.User>
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Users</title>
-</head>
-<body>
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
@@ -22,9 +10,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User_Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Enabled)
@@ -53,9 +38,6 @@
                 @Html.DisplayFor(modelItem => item.User_Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Enabled)
             </td>
             <td>
@@ -79,5 +61,3 @@
     }
     
     </table>
-</body>
-</html>
