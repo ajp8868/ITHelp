@@ -11,17 +11,15 @@ namespace ITHelp_Api.Tools
     {
         public static Ticket checkById(int id, List<Ticket> tickets)
         {
-            Ticket toReturn = null;
-
             foreach (Ticket ti in tickets)
             {
                 if (ti.Id == id)
                 {
-                    toReturn = ti;
+                    return ti;
                 }
             }
 
-            return toReturn;
+            return null;
         }
 
         public static List<Ticket> checkByUser(string user, List<Ticket> tickets)

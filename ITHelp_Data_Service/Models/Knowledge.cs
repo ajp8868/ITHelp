@@ -30,5 +30,6 @@ namespace ITHelp_Data_Service.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Knowledge_Keywords> Knowledge_Keywords { get; set; }
+        public virtual User User_Added { get; set; }
     }
 }

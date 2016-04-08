@@ -11,6 +11,7 @@ namespace ITHelp_Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Knowledge
     {
@@ -24,11 +25,17 @@ namespace ITHelp_Models
         public string Title { get; set; }
         public string Description { get; set; }
         public int Revision { get; set; }
+        [Display(Name = "Added By")]
         public Nullable<int> Added_By { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [Display(Name="First Added")]
         public System.DateTime Added_On { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [Display(Name="Last Updated")]
         public System.DateTime Last_Updated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Knowledge_Keywords> Knowledge_Keywords { get; set; }
+        public virtual User User_Added { get; set; }
     }
 }

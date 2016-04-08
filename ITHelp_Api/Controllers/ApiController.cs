@@ -151,7 +151,7 @@ namespace ITHelp_Api.Controllers
             return sc.PostUserAsync(user).Result;
         }
 
-        // POST: api/tickets
+        // POST: api/knowledge
         [Route("api/tickets/")]
         [HttpPost]
         public HttpResponseMessage PostTicket(Ticket ticket)
@@ -181,7 +181,7 @@ namespace ITHelp_Api.Controllers
             return sc.PostTicketAsync(ticket).Result;
         }
 
-        // PUT: api/tickets
+        // PUT: api/knowledge
         [Route("api/tickets/")]
         [HttpPut]
         public async Task<HttpResponseMessage> PutTicket(Ticket ticket)
@@ -195,14 +195,34 @@ namespace ITHelp_Api.Controllers
             }
         }
 
-        // GET: api/Api/5
+        // GET: api/Knowledge{searchstring}
         [Route("api/knowledge")]
         [HttpGet]
         public ActionResult GetKnowledge()
         {
+            string search = Request["search"];
             var items = sc.GetKnowledge();
 
-            return JsonTools.SuccessfulJson(items);
+            if (search != null)
+            {
+                KnowledgeTools.CheckBySearch(search, items);
+
+                return JsonTools.SuccessfulJson(items);
+            }
+            else
+            {
+                return JsonTools.SuccessfulJson(items);
+            }
+        }
+
+        // GET: api/Knowledge{searchstring}
+        [Route("api/knowledge/{id}")]
+        [HttpGet]
+        public ActionResult GetKnowledge(int id)
+        {
+            var items = sc.GetKnowledge();
+
+            return JsonTools.SuccessfulJson(KnowledgeTools.CheckById(id, items));
         }
     }
 }

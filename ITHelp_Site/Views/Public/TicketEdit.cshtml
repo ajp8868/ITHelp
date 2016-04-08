@@ -1,17 +1,7 @@
 ﻿@model ITHelp_Models.Ticket
-
-@{
-    Layout = null;
+@section Styles {
+    <link href="@Url.Content("~/Content/Edit.css")" rel="stylesheet" type="text/css" />
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -131,5 +121,3 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
-</body>
-</html>

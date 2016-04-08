@@ -1,0 +1,121 @@
+﻿@model ITHelp_Models.Ticket
+@section Styles {
+    <link href="@Url.Content("~/Content/Detail.css")" rel="stylesheet" type="text/css" />
+}
+<h2 class="ticketHeader">
+    <div class="L1">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+    <div class="L1">
+        @Html.DisplayNameFor(model => model.Reference): @Html.DisplayFor(model => model.Reference)
+    </div>
+</h2>
+        <dl class="dl-horizontal">    
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Raised)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Raised)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Status_Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ticket_Status.Name)
+            </dd>
+            @if (Model.Ticket_Status.Complete) 
+            { 
+                <dt>
+                    @Html.DisplayNameFor(model => model.Completed_On)
+                </dt>
+    
+                <dd>
+                    @Html.DisplayFor(model => model.Completed_On)
+                </dd>
+            }
+            <dt>
+                @Html.DisplayNameFor(model => model.Urgency_Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ticket_Urgency.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Type_Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ticket_Type.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Raised_By)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.User_Raised.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Needs_Approval)
+            </dt>
+    
+            <dd>
+               @(Model.Needs_Approval == true ? "Yes":"No")
+            </dd>
+            @if (Model.Needs_Approval == true)
+            { 
+                <dt>
+                    @Html.DisplayNameFor(model => model.Approved_By)
+                </dt>
+    
+                <dd>
+                    @Html.DisplayFor(model => model.Approved_By)
+                </dd>
+            }
+            <dt>
+                @Html.DisplayNameFor(model => model.Required_By)
+            </dt>
+    
+            <dd>
+                <strong>@Html.DisplayFor(model => model.Required_By)</strong>
+            </dd>
+    
+        </dl>
+
+<div class="ticketHistory">
+    <h3>Ticket History</h3>
+    @foreach (var item in Model.Ticket_History)
+    {
+        <div class="history_entry">
+            <div class="value history_title">
+                <p>@Html.DisplayFor(modelItem => item.Updated_On)</p>
+            </div>
+            <div class="value">
+                <p>@Html.DisplayFor(modelItem => item.Description)</p>
+            </div>
+        </div>
+    }
+</div>
+<div class="ticketKeywords">
+    <h3>Associated Kowledge</h3>
+    @foreach (var item in Model.Ticket_Keywords)
+    {
+        @Html.DisplayFor(modelItem => item.Keyword)
+    }
+</div>
+    <p>
+        @Html.ActionLink("Edit", "tickets/Edit", new { id = Model.Id }, new { @class = "btn btn_edit" })
+        @Html.ActionLink("Back to List", "Tickets", null, new { @class = "btn btn_back" })
+    </p>

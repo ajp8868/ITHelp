@@ -513,6 +513,7 @@
           <Property Name="Added_On" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Last_Updated" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Knowledge_Keywords" Relationship="Self.FK_Knowledge_Keywords_Knowledge" FromRole="Knowledge" ToRole="Knowledge_Keywords" />
+          <NavigationProperty Name="User_Added" Relationship="FYP.IT_DeskModel.KnowledgeUser" FromRole="Knowledge" ToRole="User" />
         </EntityType>
         <EntityType Name="Knowledge_Keywords">
           <Key>
@@ -840,6 +841,10 @@
             <End Role="Ticket_Types" EntitySet="Ticket_Types" />
             <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
+          <AssociationSet Name="KnowledgeUser" Association="FYP.IT_DeskModel.KnowledgeUser">
+            <End Role="Knowledge" EntitySet="Knowledges" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Asset_Types">
           <Key>
@@ -956,6 +961,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="KnowledgeUser">
+          <End Type="FYP.IT_DeskModel.Knowledge" Role="Knowledge" Multiplicity="*" />
+          <End Type="FYP.IT_DeskModel.User" Role="User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Knowledge">
+              <PropertyRef Name="Added_By" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1007,11 +1024,11 @@
           <EntitySetMapping Name="Knowledges">
             <EntityTypeMapping TypeName="FYP.IT_DeskModel.Knowledge">
               <MappingFragment StoreEntitySet="Knowledge">
+                <ScalarProperty Name="Added_By" ColumnName="Added_By" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Revision" ColumnName="Revision" />
-                <ScalarProperty Name="Added_By" ColumnName="Added_By" />
                 <ScalarProperty Name="Added_On" ColumnName="Added_On" />
                 <ScalarProperty Name="Last_Updated" ColumnName="Last_Updated" />
               </MappingFragment>

@@ -258,6 +258,8 @@
     <Content Include="Resources\Images\Network Cables.jpg" />
     <Content Include="Scripts\DlhSoft.Data.DatePicker.Angular.Directives.js" />
     <Content Include="Scripts\DlhSoft.Data.DatePicker.HTML.Controls.js" />
+    <None Include="Properties\PublishProfiles\ITHelpSite - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ITHelpSite - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.2.js" />
     <Content Include="Scripts\jquery-2.2.2.min.js" />
@@ -314,29 +316,21 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Tickets\Create.cshtml" />
-    <Content Include="Views\Tickets\Delete.cshtml" />
-    <Content Include="Views\Tickets\Details.cshtml" />
-    <Content Include="Views\Tickets\Edit.cshtml" />
-    <Content Include="Views\Tickets\IndexAdmin.cshtml" />
     <Content Include="Views\Error\AdminError.cshtml" />
-    <Content Include="Views\Tickets\IndexViewer.cshtml" />
     <Content Include="Views\Admin\TicketCreate.cshtml" />
     <Content Include="Views\Admin\TicketDelete.cshtml" />
     <Content Include="Views\Admin\TicketDetails.cshtml" />
     <Content Include="Views\Admin\TicketEdit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Public\Create.cshtml" />
-    <Content Include="Views\Public\Delete.cshtml" />
-    <Content Include="Views\Public\Details.cshtml" />
-    <Content Include="Views\Public\Edit.cshtml" />
+    <Content Include="Views\Public\TicketCreate.cshtml" />
+    <Content Include="Views\Public\TicketDelete.cshtml" />
+    <Content Include="Views\Public\TicketEdit.cshtml" />
     <Content Include="Views\Public\Index.cshtml" />
     <Content Include="Views\Admin\Tickets.cshtml" />
     <Content Include="Views\Admin\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Public\Tickets.cshtml" />
-    <Content Include="Views\Public\TicketsDetails.cshtml" />
     <Content Include="Views\Public\_ViewStart.cshtml" />
     <Content Include="Views\Admin\Assets.cshtml" />
     <Content Include="Views\Shared\FilterView.cshtml" />
@@ -344,13 +338,16 @@
     <Content Include="Views\Admin\UserEdit.cshtml" />
     <Content Include="Views\Admin\Knowledge.cshtml" />
     <Content Include="Views\Admin\KnowledgeView.cshtml" />
+    <Content Include="Views\Admin\TicketApprove.cshtml" />
+    <Content Include="Views\Public\TicketDetails.cshtml" />
+    <Content Include="Views\Public\Knowledge.cshtml" />
+    <Content Include="Views\Public\KnowledgeView.cshtml" />
+    <Content Include="Views\Shared\SearchView.cshtml" />
     <Content Include="Views\Admin\KnowledgeCreate.cshtml" />
     <Content Include="Views\Admin\KnowledgeEdit.cshtml" />
-    <Content Include="Views\Admin\TicketApprove.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -9,9 +9,11 @@ using System.Web;
 using System.Web.Mvc;
 using ITHelp_Models;
 using WebMatrix.WebData;
+using System.Net.Http;
 
 namespace ITHelp_Site.Controllers
 {
+    [RoutePrefix("public")]
     public class PublicController : Controller
     {
         private UsersContext db = new UsersContext();
@@ -24,16 +26,18 @@ namespace ITHelp_Site.Controllers
         }
 
         // GET: Tickets
+        [Route("tickets")]
         public ActionResult Tickets()
         {
             return View(sc.GetTicketsByUser(WebSecurity.CurrentUserName));
         }
 
         // GET: Public/Details/5
-        [Route("public/tickets/details/{id}")]
-        public ActionResult Details(int id)
+        [HttpGet]
+        [Route("tickets/details/{id}")]
+        public ActionResult TicketDetails(int id)
         {
-            if (id == null)
+            if (id < 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -42,16 +46,17 @@ namespace ITHelp_Site.Controllers
             {
                 return HttpNotFound();
             }
-            return View(ticket);
+            return View("TicketDetails", ticket);
         }
 
         // GET: Public/Create
-        public ActionResult Create()
+        [Route("tickets/create")]
+        public ActionResult CreateTicket()
         {
             ViewData["types"] = sc.GetTickTypes();
             ViewData["statuses"] = sc.GetTickStatuses();
             ViewData["urgencies"] = sc.GetTickUrgencies();
-            return View();
+            return View("TicketCreate");
         }
 
         // POST: Public/Create
@@ -59,7 +64,8 @@ namespace ITHelp_Site.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Title,Description,Urgency_Id,Type_Id,Required_By")] Ticket ticket)
+        [Route("tickets/create")]
+        public async Task<ActionResult> CreateTicket([Bind(Include = "Title,Description,Urgency_Id,Type_Id,Required_By")] Ticket ticket)
         {
             var user = sc.GetUserAsync(WebSecurity.CurrentUserName);
 
@@ -74,11 +80,12 @@ namespace ITHelp_Site.Controllers
             ViewData["types"] = sc.GetTickTypes();
             ViewData["statuses"] = sc.GetTickStatuses();
             ViewData["urgencies"] = sc.GetTickUrgencies();
-            return View(ticket);
+            return View("TicketCreate", ticket);
         }
 
         // GET: Public/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        [Route("tickets/edit")]
+        public async Task<ActionResult> EditTicket(int? id)
         {
             if (id == null)
             {
@@ -89,7 +96,7 @@ namespace ITHelp_Site.Controllers
             {
                 return HttpNotFound();
             }
-            return View(ticket);
+            return View("TicketEdit", ticket);
         }
 
         // POST: Public/Edit/5
@@ -97,15 +104,16 @@ namespace ITHelp_Site.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("tickets/edit")]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Reference,Title,Description,Raised,Status_Id,Completed_On,Urgency_Id,Type_Id,Raised_By,Needs_Approval,Approved_By,Required_By")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(ticket).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Tickets");
             }
-            return View(ticket);
+            return View("TicketEdit", ticket);
         }
 
         // GET: Public/Delete/5
@@ -123,15 +131,39 @@ namespace ITHelp_Site.Controllers
             return View(ticket);
         }
 
-        // POST: Public/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+
+    //--------------KNOWLEDGE---------------//
+
+        //GET: public/knowledge
+        [Route("knowledge")]
+        [HttpGet]
+        public ActionResult GetKnowledge()
         {
-            Ticket ticket = await db.Tickets.FindAsync(id);
-            db.Tickets.Remove(ticket);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            string search = Request["search"];
+
+            var knowl = sc.GetKnowledgeAsync(search);
+
+            if (knowl == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("Knowledge", knowl);
+        }
+
+        //GET: public/knowledge
+        [Route("knowledge/details/{id}")]
+        [HttpGet]
+        public ActionResult GetKnowledge(int id)
+        {
+            var knowl = sc.GetKnowledgeByIdAsync(id);
+
+            if (knowl == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("KnowledgeView", knowl);
         }
 
         protected override void Dispose(bool disposing)

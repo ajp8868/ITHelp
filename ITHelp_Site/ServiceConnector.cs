@@ -451,9 +451,14 @@ namespace ITHelp_Site
         }
 
         //Get all Tickets from the Repository Service
-        public List<Knowledge> GetKnowledgeAsync()
+        public List<Knowledge> GetKnowledgeAsync(string search)
         {
             var knowledgeUrl = "knowledge";
+
+            if (search != null)
+            {
+                knowledgeUrl += "?search=" + search.Replace(" ", "%20");
+            }
 
             checkUrl(knowledgeUrl);
 

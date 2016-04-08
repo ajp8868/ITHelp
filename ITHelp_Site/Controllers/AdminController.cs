@@ -181,11 +181,11 @@ namespace ITHelp_Site.Controllers
         //--------------Knowledge----------------//
 
         //GET: knowledge
-        [Route("knowledge")]
+        [Route("knowledge{search}")]
         [HttpGet]
-        public ActionResult Knowledge()
+        public ActionResult Knowledge(string search)
         {
-            return View(sc.GetKnowledgeAsync());
+            return View(sc.GetKnowledgeAsync(search));
         }
 
         // GET: Knowledge/Details/5

@@ -40,6 +40,7 @@
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Users1" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Types" Width="1.5" PointX="2.75" PointY="3.25" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Ticket_Types" />
+        <AssociationConnector Association="FYP.IT_DeskModel.KnowledgeUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
