@@ -11,13 +11,14 @@ namespace ITHelp_Site
 {
     public class ServiceConnector
     {
-        //private readonly string _baseUrl = "http://ithelpapi.azurewebsites.net/api/";
-        private readonly string _baseUrl = "http://localhost:50305/api/";
+        private readonly string _baseUrl = "http://ithelpapi.azurewebsites.net/api/";
+        //private readonly string _baseUrl = "http://localhost:50305/api/";
+        
         //Get all assets from the Repository Service
-        public List<Ticket> GetTicketsAsync(string productUrl = "tickets")
+        public List<Ticket> GetTicketsAsync(string ticketsUrl = "tickets")
         {
-            checkUrl(productUrl);
-            var uri = _baseUrl + productUrl;
+            checkUrl(ticketsUrl);
+            var uri = _baseUrl + ticketsUrl;
 
             using (var httpClient = new HttpClient())
             {
@@ -29,6 +30,37 @@ namespace ITHelp_Site
                     {
                         tickets = JsonConvert.DeserializeObject<List<Ticket>>(
                             httpClient.GetStringAsync(uri).Result);
+                        Console.Out.WriteLine("Success getting Tickets");
+                        i = 3;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Out.WriteLine("Problem Getting Tickets. Attempt: " + (i + 1).ToString());
+                    }
+                }
+
+                httpClient.Dispose();
+
+                return tickets;
+            }
+        }
+
+        public List<Ticket> GetTicketsWithParamsAsync(TicketFilter filter)
+        {
+            var ticketsUrl = "tickets/filter";
+            checkUrl(ticketsUrl);
+            var uri = _baseUrl + ticketsUrl;
+
+            using (var httpClient = new HttpClient())
+            {
+                List<Ticket> tickets = null;
+
+                for (var i = 0; i <= 2; i++)
+                {
+                    try
+                    {
+                        tickets = JsonConvert.DeserializeObject<List<Ticket>>(
+                            httpClient.PostAsJsonAsync(uri, filter).Result.Content.ReadAsStringAsync().Result);
                         Console.Out.WriteLine("Success getting Tickets");
                         i = 3;
                     }
@@ -209,6 +241,38 @@ namespace ITHelp_Site
         }
 
         //Get all assets from the Repository Service
+        public User GetUserByIdAsync(int id, string UsersUrl = "user")
+        {
+            checkUrl(UsersUrl);
+
+            var uri = _baseUrl + UsersUrl + "/id/" + id;
+
+            using (var httpClient = new HttpClient())
+            {
+                User user = null;
+
+                for (var i = 0; i <= 2; i++)
+                {
+                    try
+                    {
+                        user = JsonConvert.DeserializeObject<User>(
+                            httpClient.GetStringAsync(uri).Result);
+                        Console.Out.WriteLine("Success getting User");
+                        i = 3;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Out.WriteLine("Problem Getting user. Attempt: " + (i + 1).ToString());
+                    }
+                }
+
+                httpClient.Dispose();
+
+                return user;
+            }
+        }
+
+        //Get all assets from the Repository Service
         public List<Ticket_Statuses> GetTickStatuses(string statusUrl = "tickets/statuses")
         {
 
@@ -333,6 +397,90 @@ namespace ITHelp_Site
                 var x = await client.PostAsJsonAsync(uri, ticket).ConfigureAwait(false);
 
                 return x;
+            }
+        }
+
+        //Get all assets from the Repository Service
+        public async Task<HttpResponseMessage> PutTicketAsync(Ticket ticket, string ticketUrl = "tickets")
+        {
+            checkUrl(ticketUrl);
+
+            var uri = _baseUrl + ticketUrl;
+
+            using (var client = new HttpClient())
+            {
+
+                var x = await client.PutAsJsonAsync(uri, ticket).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+        //Get all Tickets from the Repository Service
+        public Knowledge GetKnowledgeByIdAsync(int id)
+        {
+            var knowledgeUrl = "knowledge/" + id;
+
+            checkUrl(knowledgeUrl);
+
+            var uri = _baseUrl + knowledgeUrl;
+
+            using (var httpClient = new HttpClient())
+            {
+                Knowledge knowledge = null;
+
+                for (var i = 0; i <= 2; i++)
+                {
+                    try
+                    {
+                        knowledge = JsonConvert.DeserializeObject<Knowledge>(
+                            httpClient.GetStringAsync(uri).Result);
+                        Console.Out.WriteLine("Success getting knowledge");
+                        i = 3;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Out.WriteLine("Problem Getting knowledge. Attempt: " + (i + 1).ToString());
+                    }
+                }
+
+                httpClient.Dispose();
+
+                return knowledge;
+            }
+        }
+
+        //Get all Tickets from the Repository Service
+        public List<Knowledge> GetKnowledgeAsync()
+        {
+            var knowledgeUrl = "knowledge";
+
+            checkUrl(knowledgeUrl);
+
+            var uri = _baseUrl + knowledgeUrl;
+
+            using (var httpClient = new HttpClient())
+            {
+                List<Knowledge> knowledge = null;
+
+                for (var i = 0; i <= 2; i++)
+                {
+                    try
+                    {
+                        knowledge = JsonConvert.DeserializeObject<List<Knowledge>>(
+                            httpClient.GetStringAsync(uri).Result);
+                        Console.Out.WriteLine("Success getting knowledge");
+                        i = 3;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Out.WriteLine("Problem Getting knowledge. Attempt: " + (i + 1).ToString());
+                    }
+                }
+
+                httpClient.Dispose();
+
+                return knowledge;
             }
         }
 

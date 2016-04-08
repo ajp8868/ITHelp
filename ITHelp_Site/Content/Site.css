@@ -101,16 +101,29 @@ h1 {
 
 h2 {
     margin-top: 0px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     font-size: 30px;
     text-align: center;
     background: url('../Resources/Images/Network Cables.jpg') left 50% no-repeat;
     background-size: cover;
     color: white;
+    box-sizing:border-box
+}
+
+h2 .error {
+    color: red;
 }
 
 h3 {
-    font-size: 1.2em;
+    margin-top: 0px;
+    padding-bottom: 5px;
+    font-size: 30px;
+    text-align: center;
+    background: url('../Resources/Images/Network Cables 2.jpg') left 25% no-repeat;
+    background-size: cover;
+    color: white;
+    box-sizing:border-box
 }
 
 h4 {
@@ -131,7 +144,7 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 70%;
+    max-width: 100%;
 }
 
 #main_logo {
@@ -148,7 +161,7 @@ h5, h6 {
         padding-left: 0px;
         padding-right: 0px;
         padding-top: 0px;
-        width: 70%;
+        width: 98%;
     }
 
     .featured + .main-content {
@@ -158,7 +171,7 @@ h5, h6 {
 header .content-wrapper {
     display: inline-block;
     position: relative;
-    width: 70%;
+    width: 98%;
     height: 50px;
     padding-top: 10px;
     padding-bottom: 10px; 
@@ -169,6 +182,7 @@ footer {
     background-color: #e2e2e2;
     font-size: .8em;
     height: 100px;
+    text-align: center;
 }
 
 
@@ -193,13 +207,12 @@ footer {
 ----------------------------------------------------------*/
 #login {
     display: block;
-    font-size: .85em;
+    font-size: 17px;
     margin: 0 0 10px;
     text-align: right;
 }
 
     #login a {
-        background-color: #d3dce0;
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
@@ -210,7 +223,7 @@ footer {
         background: none;
         margin: 0;
         padding: 0;
-        text-decoration: underline;
+        font-weight: bold;
     }
 
     #login ul {
@@ -517,6 +530,35 @@ textarea {
         margin-right: 4px;
     }
 
+    .form-horizontal {
+        display: inline-block;
+        position: relative;
+    }
+
+    .form-group.horiz {
+        float: left;
+        max-width: 200px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .form-group.horiz .form-control {
+        max-width: 100%;
+    }
+
+    .form-group.horiz .btn {
+        position: absolute;
+        bottom: 2px;
+        border: none;
+        background-color: darkcyan;
+        color: white;
+        padding: 8px;
+        float: left;
+        display: inline-block;
+        margin-left: 20px;
+        font-size: 14px;
+    }
+
 /* info and errors */
 .message-info {
     border: 1px solid;
@@ -672,7 +714,6 @@ tr.pager td {
         }
 
         #login a {
-            background: none;
             color: #999;
             font-weight: 600;
             margin: 2px;
@@ -800,4 +841,55 @@ tr.pager td {
         footer p {
             margin: 0;
         }
+}
+
+a.btn, input.btn {
+        min-width: 50px;
+        min-height: 25px;
+        height: 25px;
+        max-height: 25px;
+        color: white;
+        border: none;
+        margin: 5px;
+        padding: 7px;
+        padding-bottom: 2px;
+        padding-top: 5px;
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+.btn_logoff, .btn_register, .btn_login {
+    background-color: lightslategrey;
+    height: auto !important;
+    min-height: 0px !important;
+    padding-bottom: 5px !important;
+    font-size: 12px;
+}
+
+input.btn.btn_login_home {
+    font-size: 20px;
+    background-color: lightslategrey;
+    padding-bottom: 28px;
+}
+
+.btn_back {
+    background-color: darkgoldenrod;
+}
+
+.btn_default {
+    font-size: .85em !important;
+    background-color: lightslategrey !important;
+    min-height: 25px;
+    box-sizing: content-box;
+}
+
+.btn_approve, .btn_save {
+    font-size: 25px !important;
+    background-color: forestgreen !important;
+    min-width: 150px !important;
+    min-height: 75px !important;
+    box-sizing: content-box;
 }

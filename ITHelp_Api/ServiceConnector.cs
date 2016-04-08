@@ -11,8 +11,8 @@ namespace ITHelp_Api
 {
     public class ServiceConnector
     {
-        //private readonly string _baseUrl = "http://ithelpdata.azurewebsites.net/api/";
-        private readonly string _baseUrl = "http://localhost:57532/api/";
+        private readonly string _baseUrl = "http://ithelpdata.azurewebsites.net/api/";
+        //private readonly string _baseUrl = "http://localhost:57532/api/";
 
         private string checkUrl(string url)
         {
@@ -248,6 +248,72 @@ namespace ITHelp_Api
                 var x = await client.PostAsJsonAsync(uri, ticket).ConfigureAwait(false);
 
                 return x;
+            }
+        }
+
+        //Get all assets from the Repository Service
+        public async Task<HttpResponseMessage> PutTicketAsync(Ticket ticket, string ticketUrl = "tickets")
+        {
+            checkUrl(ticketUrl);
+
+            var uri = _baseUrl + ticketUrl + "/" + ticket.Id;
+
+            using (var client = new HttpClient())
+            {
+
+                var x = await client.PutAsJsonAsync(uri, ticket).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+        //Get all assets from the Repository Service
+        public async Task<HttpResponseMessage> PostTicketHistoryAsync(Ticket_History tHistory, string ticketUrl = "ticket_history")
+        {
+            checkUrl(ticketUrl);
+
+            var uri = _baseUrl + ticketUrl;
+
+            using (var client = new HttpClient())
+            {
+
+                var x = await client.PostAsJsonAsync(uri, tHistory).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+        //Get all Tickets from the Repository Service
+        public List<Knowledge> GetKnowledge()
+        {
+            var knowledgeUrl = "knowledge";
+
+            checkUrl(knowledgeUrl);
+
+            var uri = _baseUrl + knowledgeUrl;
+
+            using (var httpClient = new HttpClient())
+            {
+                List<Knowledge> knowledge = null;
+
+                for (var i = 0; i <= 2; i++)
+                {
+                    try
+                    {
+                        knowledge = JsonConvert.DeserializeObject<List<Knowledge>>(
+                            httpClient.GetStringAsync(uri).Result);
+                        Console.Out.WriteLine("Success getting knowledge");
+                        i = 3;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Out.WriteLine("Problem Getting knowledge. Attempt: " + (i + 1).ToString());
+                    }
+                }
+
+                httpClient.Dispose();
+
+                return knowledge;
             }
         }
     }

@@ -2,7 +2,9 @@
 using ITHelp_Models;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace ITHelp_Api.Controllers
@@ -18,6 +20,20 @@ namespace ITHelp_Api.Controllers
         public ActionResult GetAllTickets()
         {
             return JsonTools.SuccessfulJson(sc.GetTickets());
+        }
+
+        [Route("api/tickets/filter/")]
+        [HttpPost]
+        public ActionResult GetAllTickets(TicketFilter filter)
+        {
+            var tickets = sc.GetTickets();
+
+            if (filter != null)
+            {
+                tickets = TicketTools.checkByFilter(filter, tickets);
+            }
+
+            return JsonTools.SuccessfulJson(tickets);
         }
 
         // GET: api/Api/5
@@ -88,7 +104,7 @@ namespace ITHelp_Api.Controllers
         }
 
         // GET: api/Api/5
-        [Route("api/users/{id}")]
+        [Route("api/user/id/{id}")]
         [HttpGet]
         public ActionResult GetUsersById(int id)
         {
@@ -113,18 +129,19 @@ namespace ITHelp_Api.Controllers
                 return JsonTools.UnsuccessfulJson(e.ToString());
             }
 
-            
         }
 
         // GET: api/Api/5
-        [Route("api/users{username}")]
+        [Route("api/users/id/{id}")]
         [HttpGet]
-        public ActionResult GetUsersById(string username)
+        public ActionResult GetUserById(int id)
         {
             var items = sc.GetUsers();
 
-            return JsonTools.SuccessfulJson(UserTools.checkByUsername(username, items));
+            return JsonTools.SuccessfulJson(UserTools.checkById(id, items));
         }
+
+
 
         // POST: api/urgencies
         [Route("api/users/")]
@@ -147,9 +164,45 @@ namespace ITHelp_Api.Controllers
             {
                 ticket.Reference = DateTime.Now.ToString("ddMMyyyy-mmss") + ticket.Title;
             }
+
+            if (ticket.Type_Id == 4 || ticket.Type_Id == 5)
+            {
+                ticket.Status_Id = 1;
+                ticket.Needs_Approval = true;
+            }
+            else
+            {
+                ticket.Status_Id = 2;
+                ticket.Needs_Approval = false;
+            }
+
             ticket.Raised = DateTime.Now;
 
             return sc.PostTicketAsync(ticket).Result;
+        }
+
+        // PUT: api/tickets
+        [Route("api/tickets/")]
+        [HttpPut]
+        public async Task<HttpResponseMessage> PutTicket(Ticket ticket)
+        {
+            if (!ModelState.IsValid)
+            { return new HttpResponseMessage(HttpStatusCode.BadRequest); }
+            else
+            {
+                TicketTools.CreateHistory(sc, ticket);
+                return await sc.PutTicketAsync(ticket).ConfigureAwait(false);
+            }
+        }
+
+        // GET: api/Api/5
+        [Route("api/knowledge")]
+        [HttpGet]
+        public ActionResult GetKnowledge()
+        {
+            var items = sc.GetKnowledge();
+
+            return JsonTools.SuccessfulJson(items);
         }
     }
 }

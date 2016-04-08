@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_History" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Keywords" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Statuses" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Types" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Urgencies" Width="1.5" PointX="2.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.User" Width="1.5" PointX="4.125" PointY="12.875" IsExpanded="true" />
@@ -29,7 +28,6 @@
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Ticket_History_Tickets" ManuallyRouted="false" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Ticket_Keywords_Tickets" ManuallyRouted="false" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Ticket_Statuses" ManuallyRouted="false" />
-        <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Ticket_Types" ManuallyRouted="false" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Ticket_Urgencies" ManuallyRouted="false" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Asset_Types" Width="1.5" PointX="8.875" PointY="18.875" />
         <EntityTypeShape EntityType="FYP.IT_DeskModel.Location" Width="1.5" PointX="6" PointY="15.375" />
@@ -40,6 +38,8 @@
         <AssociationConnector Association="FYP.IT_DeskModel.TicketTicket_Users" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Users" />
         <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Users1" />
+        <EntityTypeShape EntityType="FYP.IT_DeskModel.Ticket_Types" Width="1.5" PointX="2.75" PointY="3.25" />
+        <AssociationConnector Association="FYP.IT_DeskModel.FK_Tickets_Ticket_Types" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

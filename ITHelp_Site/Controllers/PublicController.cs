@@ -59,12 +59,11 @@ namespace ITHelp_Site.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Title,Description,Raised,Status_Id,Urgency_Id,Type_Id,Needs_Approval,Required_By")] Ticket ticket)
+        public async Task<ActionResult> Create([Bind(Include = "Title,Description,Urgency_Id,Type_Id,Required_By")] Ticket ticket)
         {
             var user = sc.GetUserAsync(WebSecurity.CurrentUserName);
 
             ticket.Raised_By = user.Id;
-            ticket.User_Raised = user;
 
             if (ModelState.IsValid)
             {

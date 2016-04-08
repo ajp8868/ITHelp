@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace ITHelp_Api.Tools
@@ -36,6 +37,49 @@ namespace ITHelp_Api.Tools
             }
 
             return toReturn;
+        }
+
+        public static List<Ticket> checkByFilter(TicketFilter filter, List<Ticket> tickets)
+        {
+            var toRemove = new List<Ticket>();
+            var toReturn = tickets;
+
+            foreach (Ticket ti in tickets)
+            {
+                if (filter.completed.HasValue && ti.Ticket_Status.Complete != filter.completed.GetValueOrDefault())
+                {
+                    toRemove.Add(ti);
+                }
+                if (filter.day_limit.HasValue && DateTime.Compare(ti.Required_By, DateTime.Now.AddDays(filter.day_limit.GetValueOrDefault())) > 0)
+                {
+                    toRemove.Add(ti);
+                }
+                if (filter.awaiting_approval.HasValue && ti.Needs_Approval != filter.awaiting_approval.GetValueOrDefault())
+                {
+                    toRemove.Add(ti);
+                }
+            }
+
+            foreach(Ticket ti in toRemove)
+            {
+                toReturn.Remove(ti);
+            }
+
+            return toReturn;
+        }
+
+        public static void CreateHistory(ServiceConnector sc, Ticket ticket) {
+            var th = new Ticket_History();
+
+            th.Description = ticket.Description;
+            th.Status_Id = ticket.Status_Id;
+            th.Ticket_Id = ticket.Id;
+            th.Urgency_Id = ticket.Urgency_Id;
+            th.Updated_On = DateTime.Now;
+            th.Update_Num = ticket.Ticket_History.Count + 1;
+            th.Updated_By = (int)ticket.Raised_By;
+
+            var x = sc.PostTicketHistoryAsync(th).Result;
         }
     }
 }

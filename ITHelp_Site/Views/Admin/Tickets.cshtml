@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ITHelp_Models.Ticket>
 
     @section Styles {
-        <link href="@Url.Content("~/Content/Tickets.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/List.css")" rel="stylesheet" type="text/css" />
     }
 
     @{
@@ -10,10 +10,10 @@
 
     <h2>All Tickets</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn_create" })
-    </p>
+    @{Html.RenderPartial("~/Views/Shared/FilterView.cshtml", (ITHelp_Models.TicketFilter)ViewBag.ticketfilter);}
+
     <table class="table">
+        @if(Model != null) {<tr class="button"><td class="button">@Html.ActionLink("Create New", "Tickets/Create", null, new { @class = "btn btn_create" })</td></tr>}
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Reference)
@@ -41,35 +41,47 @@
             </th>
         </tr>
 
-        @foreach (var item in Model)
+        @if (Model != null)
+        { 
+            foreach (var item in Model)
+            {
+                <tr class="@(item.Ticket_Urgency.Urgency < 50? "ticket urg-med":"ticket urg-high")">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reference)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Raised)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ticket_Status.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ticket_Type.Name)
+                    </td>
+                    <td>
+                        @if (item.Needs_Approval)
+                        { 
+                            @Html.ActionLink("Yes", "tickets/approve", new {id = item.Id}, new {@class = "btn btn_yes"})
+                        }
+                        else { @("No") }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Required_By)
+                    </td>
+                    <td class="end_row">
+                        @Html.ActionLink("Edit", "tickets/edit", new { id = item.Id }, new { @class = "btn btn_edit" })
+                        @Html.ActionLink("Details", "tickets/details", new { id = item.Id }, new { @class = "btn btn_details" })
+                        @Html.ActionLink("Delete", "tickets/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reference)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Raised)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ticket_Status.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ticket_Type.Name)
-                </td>
-                <td>
-                    @(item.Needs_Approval ? "Yes" : "No")
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Required_By)
-                </td>
-                <td class="end_row">
-                    @Html.ActionLink("Details", "tickets/details", new { id = item.Id }, new { @class = "btn btn_details" })
-                    @Html.ActionLink("Delete", "tickets/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
-                </td>
-            </tr>
+            <h2 class="error">No Tickets Found!</h2>
         }
 
     </table>

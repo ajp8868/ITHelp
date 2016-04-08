@@ -1,0 +1,94 @@
+﻿.btn_delete {
+    background-color: maroon;
+}
+
+.btn.btn-default {
+    padding-bottom: 25px !important;
+}
+
+.btn_details {
+    background-color: darkslateblue;
+}
+
+.btn.btn_create {
+    background-color: ThreeDDarkShadow;
+    float: right;
+    display: inline-block;
+    position: relative;
+    margin-right: 45px;
+}
+
+.btn_edit {
+    background-color: darkseagreen;
+}
+
+.btn_cancel {
+    background-color: orange;
+}
+
+.btn_yes {
+    background-color: darkviolet;
+}
+
+td.button {
+    position: absolute;
+    display: inline-block;
+    right: -27px;
+    top: -47px;
+    border-top: none;
+    border-bottom: none;
+}
+
+tr.button {
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.table {
+    position: relative;
+}
+
+.table tr {
+    position: relative;
+    background-color: white;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align: center;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.table th {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 9px;
+}
+
+.table .end_row {
+    padding-right: 0px;
+    margin-right: 0px;
+    min-width: 150px;
+}
+
+.table td {
+    padding-right: 0px;
+}
+
+table.table {
+    padding-left: 20px;
+    min-width: 100%;
+}
+
+.filterForm {
+    display: inline-block;
+    position: relative;
+    width: auto;
+}
+
+.ticket.urg-med {
+    background-color: rgba(255,100,20,0.3);
+}
+
+.ticket.urg-high {
+    background-color: rgba(255,0,0,0.2);
+}

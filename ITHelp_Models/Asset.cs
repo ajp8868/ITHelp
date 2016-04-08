@@ -11,14 +11,23 @@ namespace ITHelp_Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Asset
     {
         public int Id { get; set; }
+        [Display(Name = "Type")]
+        [Required]
         public int Type_Id { get; set; }
+        [Display(Name = "Location")]
+        [Required]
         public int Location_Id { get; set; }
         public string Description { get; set; }
+        [Display(Name = "Date Bought")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> Bought { get; set; }
+        [Display(Name = "Supplier")]
+        [Required]
         public Nullable<int> Supplier_Id { get; set; }
     
         public virtual Asset_Suppliers Asset_Suppliers { get; set; }

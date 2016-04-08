@@ -40,9 +40,9 @@ namespace ITHelp_Data_Service.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket_Keywords> Ticket_Keywords { get; set; }
         public virtual Ticket_Statuses Ticket_Status { get; set; }
-        public virtual Ticket_Types Ticket_Type { get; set; }
         public virtual Ticket_Urgencies Ticket_Urgency { get; set; }
         public virtual User User_Approve { get; set; }
         public virtual User User_Raised { get; set; }
+        public virtual Ticket_Types Ticket_Type { get; set; }
     }
 }

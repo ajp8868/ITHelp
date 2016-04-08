@@ -19,8 +19,8 @@
     </section>
 }
 <section id="loginForm">
-    <h2>Use a local account to log in.</h2>
-    @using (Html.BeginForm(new { ReturnUrl = "/tickets" }))
+    <h1>Use Your Account To Log In</h1>
+    @using (Html.BeginForm(new { ReturnUrl = "/" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -39,7 +39,7 @@
                     @Html.ValidationMessageFor(m => m.Password)
                 </li>
             </ol>
-            <input type="submit" value="Log in" formaction="../account/login?returnurl=/tickets" />
+            <input class="btn btn_login_home" type="submit" value="Log in" formaction="../account/login?returnurl=/tickets" />
         </fieldset>
         <p>
             @Html.ActionLink("Register", "../account/Register") if you don't have an account.

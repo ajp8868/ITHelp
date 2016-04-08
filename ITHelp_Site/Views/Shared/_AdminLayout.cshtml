@@ -7,6 +7,28 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <link href="@Url.Content("~/Content/themes/base/datepicker.css")" rel="stylesheet" type="text/css" />
+        <script>
+              $(function() {
+                $( "#dialog-confirm" ).dialog({
+                  resizable: false,
+                  height:140,
+                  modal: true,
+                  buttons: {
+                    "Delete all items": function() {
+                      $( this ).dialog( "close" );
+                    },
+                    Cancel: function() {
+                      $( this ).dialog( "close" );
+                    }
+                  }
+                });
+              });
+        </script>
     </head>
     <body>
         <header>
@@ -18,8 +40,10 @@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Tickets", "Index", "Tickets")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Tickets", "Tickets", "Admin")</li>
+                            <li>@Html.ActionLink("Knowledge", "Knowledge", "Admin")</li>
+                            <li>@Html.ActionLink("Assets", "Assets", "Admin")</li>
+                            <li>@Html.ActionLink("Users", "Users", "Admin")</li>
                         </ul>
                     </nav>
                 </div>
@@ -44,7 +68,6 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", required: false)
         @RenderSection("styles", false)
     </body>

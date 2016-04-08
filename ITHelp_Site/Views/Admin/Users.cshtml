@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<ITHelp_Models.User>
-
+@section Styles {
+    <link href="@Url.Content("~/Content/List.css")" rel="stylesheet" type="text/css" />
+}
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
@@ -53,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.Phone_No)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                @Html.ActionLink("Edit", "users/Edit", new { id = item.Id }, new { @class = "btn btn_edit" }) 
+                @Html.ActionLink("Details", "users/Details", new { id = item.Id }, new { @class = "btn btn_details" }) 
+                @Html.ActionLink("Delete", "users/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
             </td>
         </tr>
     }

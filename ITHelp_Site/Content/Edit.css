@@ -1,0 +1,73 @@
+﻿body .content-wrapper {
+    text-align: center;
+}
+
+textarea {
+    height: 100px;
+}
+
+.form-horizontal {
+    display: inline-block;
+    max-width: 850px;
+    text-align: center;
+}
+.form-horizontal .form-group {
+    display:inline-block;
+    margin-left: 15px;
+    min-width: 48%;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group .form-control {
+    display: inline-block;
+    max-width: 100%;
+}
+
+select {
+    max-height: 31px;
+    box-sizing: content-box;
+}
+
+label {
+    height: auto;
+}
+
+.form-group.block {
+    clear:left;
+}
+
+div#approval {
+    display: inline-block;
+    border: 0px solid rgba(0,105,255,2);
+    background-color: rgba(0,105,255,0.5);
+    padding-top: 10px;
+    color: white;
+    height: auto;
+    clear: left;
+    text-align: center;
+    width: 100%;
+}
+
+div#approval .form-group {
+    float: initial;
+    text-align: center;
+    width: 100%;
+}
+
+.btn_save {
+    display: inline-block;
+    clear: both;
+}
+
+div.btn {
+    clear:both;
+    margin-top: 10px;
+    margin-left: 0px !important;
+    text-align: center;
+    float: initial !important;
+}

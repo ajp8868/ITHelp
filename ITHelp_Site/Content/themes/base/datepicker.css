@@ -12,7 +12,11 @@
 	width: 17em;
 	padding: .2em .2em 0;
 	display: none;
+    background-color: white;
+    border: 2px solid black;
+    padding-right: 10px;
 }
+
 .ui-datepicker .ui-datepicker-header {
 	position: relative;
 	padding: .2em 0;

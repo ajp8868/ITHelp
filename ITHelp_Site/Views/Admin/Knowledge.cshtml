@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ITHelp_Models.Knowledge>
+@section Styles {
+    <link href="@Url.Content("~/Content/List.css")" rel="stylesheet" type="text/css" />
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Revision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Added_By)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Added_On)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Last_Updated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Revision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Added_By)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Added_On)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Last_Updated)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "knowledge/Edit", new { id = item.Id }, new { @class = "btn btn_edit" }) |
+            @Html.ActionLink("Details", "knowledge/Details", new { id = item.Id }, new { @class = "btn btn_details" }) |
+            @Html.ActionLink("Delete", "knowledge/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
+        </td>
+    </tr>
+}
+
+</table>

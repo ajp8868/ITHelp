@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ITHelp_Models.Ticket>
 
     @section Styles {
-        <link href="@Url.Content("~/Content/Tickets.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/List.css")" rel="stylesheet" type="text/css" />
     }
 
     @{
@@ -66,8 +66,15 @@
                     @Html.DisplayFor(modelItem => item.Required_By)
                 </td>
                 <td class="end_row">
-                    @Html.ActionLink("Details", "tickets/details", new { id = item.Id }, new { @class = "btn btn_details" })
-                    @Html.ActionLink("Delete", "tickets/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
+                    @Html.ActionLink("View", "tickets/details", new { id = item.Id }, new { @class = "btn btn_details" })
+                    @if (User.IsInRole("admin"))
+                    {
+                        @Html.ActionLink("Delete", "tickets/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
+                    }
+                    else if (User.IsInRole("viewer"))
+                    {
+                        @Html.ActionLink("Cancel", "public/cancel", new { id = item.Id }, new { @class = "btn btn_cancel" })
+                    }
                 </td>
             </tr>
         }
