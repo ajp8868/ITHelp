@@ -25,9 +25,12 @@
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            @if (User.Identity.IsAuthenticated) {<li>@Html.ActionLink("Tickets", "Tickets", "Public")</li>}
+                            @if (User.Identity.IsAuthenticated) 
+                            {
+                                <li>@Html.ActionLink("Tickets", "Tickets", "Public")</li>
+                                <li>@Html.ActionLink("Knowledge", "Knowledge", "Public")</li>
+                            }
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Knowledge", "Knowledge", "Public")</li>
                         </ul>
                     </nav>
                 </div>

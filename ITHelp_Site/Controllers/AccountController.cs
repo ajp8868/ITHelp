@@ -41,7 +41,7 @@ namespace ITHelp_Site.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.User_Name, model.Password, false))
             {
-                if (returnUrl.Contains("tickets"))
+                if (returnUrl != null && returnUrl.Contains("tickets"))
                 {
                     var userRoles = Roles.GetRolesForUser(model.User_Name);
 

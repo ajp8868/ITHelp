@@ -4,21 +4,20 @@
 }
 
 .mainLink {
-    display: inline-block;
+    display: table;
     float: left;
     width: 100%;
-    height: 300px;
     background-size: cover;
     background-position: 50% 0%;
     font-size: 56px;
-    font-weight: 800;
     color: black;
     text-align: center;
     box-sizing:border-box;
     padding: 10px;
     padding-top: 15px;
-    -webkit-text-stroke: 1px white;
     border-radius: 5px;
+    font-weight: normal;
+    height: 300px;
 }
 
 .mainLink.ticket {
@@ -28,12 +27,10 @@
 .mainLink.knowledge {
     background-image: url(../Resources/Images/Knowledge.jpg);
     color: white;
-    -webkit-text-stroke: 1px black;
 }
 
 .mainLink.contact {
     background-image: url(../Resources/Images/Contact.jpg);
-    padding-top: 60px;
 }
 
 .mainLink.users {
@@ -45,13 +42,28 @@
 }
 
 #linkContainer a {
-    display: inline-block;
+    display: table;
+    height: auto;
     width: 29%;
     box-sizing: border-box;
     padding: 0px;
     border-radius: 5px;
     padding: 10px;
     margin: 2%;
+    float: left;
+}
+
+.mainLink p {
+    display: table-cell;
+    vertical-align: middle;
+    border-radius: 5px;
+    background: rgba(255,255,255, 0.7);
+    margin: auto auto;
+   max-height: 201px;
+}
+
+.mainLink.knowledge p {
+    background: rgba(1,1,1,0.5);
 }
 
 #hidden:hover {

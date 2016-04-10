@@ -252,11 +252,11 @@ namespace ITHelp_Site.Controllers
 
         [Route("knowledge/edit/{id}")]
         [HttpPost]
-        public ActionResult EditKnowledge(Knowledge knowledge, int id)
+        public async Task<ActionResult> EditKnowledge(Knowledge knowledge, int id)
         {
-            var x = sc.PutKnowledgeAsync(knowledge).Result;
+            var x = await sc.PutKnowledgeAsync(knowledge).ConfigureAwait(false);
 
-            return View("knowledgeEdit");
+            return RedirectToAction("knowledge/details/" + id);
         }
 
         //-------------Assets-------------------//
@@ -286,7 +286,9 @@ namespace ITHelp_Site.Controllers
                 return View("AssetEdit", asset);
             }
 
-            return View(await sc.PutAssetAsync(asset).ConfigureAwait(false));
+            await sc.PutAssetAsync(asset).ConfigureAwait(false);
+
+            return RedirectToAction("assets/details/" + asset.Id.ToString());
         }
 
         [Route("assets/details/{id}")]
