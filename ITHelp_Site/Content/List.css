@@ -2,10 +2,6 @@
     background-color: maroon;
 }
 
-.btn.btn-default {
-    padding-bottom: 25px !important;
-}
-
 .btn_details {
     background-color: darkslateblue;
 }
@@ -15,7 +11,7 @@
     float: right;
     display: inline-block;
     position: relative;
-    margin-right: 45px;
+    margin-right: 20px;
 }
 
 .btn_edit {

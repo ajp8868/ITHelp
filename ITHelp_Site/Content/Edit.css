@@ -10,17 +10,17 @@ textarea {
     display: inline-block;
     max-width: 850px;
     text-align: center;
+    margin-top: 20px
 }
 .form-horizontal .form-group {
     display:inline-block;
     margin-left: 15px;
     min-width: 48%;
-    float: left;
     margin-bottom: 15px;
 }
 
 .form-group {
-    text-align: left;
+    text-align: center;
     min-height: 66px;
 }
 

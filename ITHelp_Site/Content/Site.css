@@ -9,7 +9,7 @@ body {
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: "Exo 2";
     margin: 0;
     padding: 0;
 }
@@ -845,26 +845,24 @@ tr.pager td {
 
 a.btn, input.btn {
         min-width: 50px;
-        min-height: 25px;
-        height: 25px;
-        max-height: 25px;
+        height: auto;
         color: white;
         border: none;
         margin: 5px;
         padding: 7px;
-        padding-bottom: 2px;
-        padding-top: 5px;
         display: inline-block;
         text-decoration: none;
         text-align: center;
         font-weight: bold;
         border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 14px;
     }
 
 .btn_logoff, .btn_register, .btn_login {
     background-color: lightslategrey;
     height: auto !important;
-    min-height: 0px !important;
+    height: auto;
     padding-bottom: 5px !important;
     font-size: 12px;
 }
@@ -880,10 +878,7 @@ input.btn.btn_login_home {
 }
 
 .btn_default, .btn-default {
-    font-size: .85em !important;
     background-color: lightslategrey !important;
-    min-height: 25px;
-    box-sizing: border-box;
 }
 
 .btn_approve, .btn_save {

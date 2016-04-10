@@ -158,9 +158,9 @@ namespace ITHelp_Api.Controllers
         [HttpGet]
         public ActionResult GetAllAssets(int id)
         {
-            var items = sc.GetAssets();
+            var items = sc.GetAssets(id);
 
-            return JsonTools.SuccessfulJson(AssetTools.CheckById(id, items));
+            return JsonTools.SuccessfulJson(items[items.Count -1]);
         }
 
         //PUTs an asset
@@ -230,19 +230,19 @@ namespace ITHelp_Api.Controllers
         }
 
         // POSTs a user
-        [Route("api/users/")]
+        [Route("api/users")]
         [HttpPost]
-        public HttpResponseMessage PostUser(User user)
+        public async Task<HttpResponseMessage> PostUser(User user)
         {
-            return sc.PostUserAsync(user).Result;
+            return await sc.PostUserAsync(user).ConfigureAwait(false);
         }
 
         // PuTs a user
-        [Route("api/users/")]
+        [Route("api/users")]
         [HttpPost]
-        public HttpResponseMessage PutUser(User user)
+        public async Task<HttpResponseMessage> PutUser(User user)
         {
-            return sc.PutUserAsync(user).Result;
+            return await sc.PutUserAsync(user).ConfigureAwait(false);
         }
 
 
