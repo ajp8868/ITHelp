@@ -1,0 +1,62 @@
+﻿@model ITHelp_Models.Ticket
+@{ViewBag.Title = "Cancel Ticket";}
+@section Styles {
+    <link href="@Url.Content("~/Content/Detail.css")" rel="stylesheet" type="text/css" />
+}
+    <h3>Are you sure you want to cancel: @Html.DisplayFor(model=>model.Title)?</h3>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Reference)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Reference)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Raised)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Raised)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Status_Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ticket_Status.Name)
+            </dd>
+   
+            <dt>
+                @Html.DisplayNameFor(model => model.Type_Id)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Ticket_Type.Name)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+            
+            <h4>Enter Your Reason For Cancelling</h4>
+            @Html.TextAreaFor(model=>model.Cancelled_Reason)
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Cancel Ticket" class="btn btn_default" /> |
+                @Html.ActionLink("Back to List", "tickets", null, new { @class = "btn btn_back" })
+            </div>
+        }
+    </div>

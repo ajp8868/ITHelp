@@ -1,4 +1,5 @@
 ﻿@model ITHelp_Models.Ticket
+@{ViewBag.Title = "Approve a Ticket";}
 @section Styles {
     <link href="@Url.Content("~/Content/Approve.css")" rel="stylesheet" type="text/css" />
 }
@@ -24,6 +25,8 @@
         @Html.HiddenFor(model => model.Approved_By)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.Required_By)
+        @Html.HiddenFor(model => model.Cancelled)
+        @Html.HiddenFor(model => model.Cancelled_Reason)
         <br/>
         <div class="form-group">
             @Html.LabelFor(model => model.Required_By, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -10,6 +10,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ITHelp_Data_Service.Models;
 
+/*
+ * Auto generated ticket urgency controller
+ * @author Adam Postgate - M2095821
+ * Email: ajp8868@aol.com
+ */
 namespace ITHelp_Data_Service.Controllers
 {
     public class Ticket_UrgenciesController : ApiController

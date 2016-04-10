@@ -10,6 +10,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ITHelp_Data_Service.Models;
 
+/*
+ * Auto generated assets controller. Alterations have been made to the get by Id to return a list.
+ * @author Adam Postgate - M2095821
+ * Email: ajp8868@aol.com
+ */
 namespace ITHelp_Data_Service.Controllers
 {
     public class AssetsController : ApiController
@@ -33,7 +38,7 @@ namespace ITHelp_Data_Service.Controllers
                 return NotFound();
             }
 
-            return Ok(asset);
+            return Ok(new List<Asset>(){asset});
         }
 
         // PUT: api/Assets/5

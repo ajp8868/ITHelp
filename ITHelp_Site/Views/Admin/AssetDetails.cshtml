@@ -1,0 +1,55 @@
+﻿@model ITHelp_Models.Asset
+@{ViewBag.Title = "Asset Details";}
+@section Styles {
+    <link href="@Url.Content("~/Content/Detail.css")" rel="stylesheet" type="text/css" />
+}
+<h2>Asset Details For: @Html.DisplayFor(model=>model.Description)</h2>
+<br />
+<div style="text-align: center;">
+    <dl class="dl-horizontal" style="text-align: center">
+        <dt>
+            @Html.DisplayNameFor(model => model.Type_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asset_Types.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bought)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bought)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asset_Suppliers.Name)
+        </dd>
+
+    </dl>
+</div>
+<p style="text-align:center;">
+    @Html.ActionLink("Edit", "assets/Edit", new { id = Model.Id }, new { @class = "btn btn_edit" })
+    @Html.ActionLink("Back to List", "assets", null, new { @class = "btn btn_back" })
+</p>

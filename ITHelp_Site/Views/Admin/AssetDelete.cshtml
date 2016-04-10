@@ -1,0 +1,58 @@
+﻿@model ITHelp_Models.Asset
+@{ViewBag.Title = "Delete Asset";}
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Asset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Type_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location_Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bought)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bought)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier_Id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

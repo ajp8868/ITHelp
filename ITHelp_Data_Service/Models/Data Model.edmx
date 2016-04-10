@@ -36,7 +36,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type_Id" Type="int" Nullable="false" />
           <Property Name="Location_Id" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
@@ -81,7 +81,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ticket_Id" Type="int" Nullable="false" />
           <Property Name="Update_Num" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
@@ -149,6 +149,8 @@
           <Property Name="Needs_Approval" Type="bit" Nullable="false" />
           <Property Name="Approved_By" Type="int" />
           <Property Name="Required_By" Type="date" Nullable="false" />
+          <Property Name="Cancelled" Type="bit" Nullable="false" />
+          <Property Name="Cancelled_Reason" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -164,7 +166,7 @@
           <Property Name="Email" Type="nvarchar(max)" />
           <Property Name="Phone_No" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Assets__Location__60A75C0F">
+        <Association Name="FK__Assets__Location__07C12930">
           <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
           <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
           <ReferentialConstraint>
@@ -176,7 +178,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Assets__Type_Id__5FB337D6">
+        <Association Name="FK__Assets__Type_Id__06CD04F7">
           <End Role="Asset_Types" Type="Self.Asset_Types" Multiplicity="1" />
           <End Role="Assets" Type="Self.Assets" Multiplicity="*" />
           <ReferentialConstraint>
@@ -385,11 +387,11 @@
           <EntitySet Name="Ticket_Users" EntityType="Self.Ticket_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Assets__Location__60A75C0F" Association="Self.FK__Assets__Location__60A75C0F">
+          <AssociationSet Name="FK__Assets__Location__07C12930" Association="Self.FK__Assets__Location__07C12930">
             <End Role="Locations" EntitySet="Locations" />
             <End Role="Assets" EntitySet="Assets" />
           </AssociationSet>
-          <AssociationSet Name="FK__Assets__Type_Id__5FB337D6" Association="Self.FK__Assets__Type_Id__5FB337D6">
+          <AssociationSet Name="FK__Assets__Type_Id__06CD04F7" Association="Self.FK__Assets__Type_Id__06CD04F7">
             <End Role="Asset_Types" EntitySet="Asset_Types" />
             <End Role="Assets" EntitySet="Assets" />
           </AssociationSet>
@@ -505,7 +507,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" annotation:StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Revision" Type="Int32" Nullable="false" />
@@ -589,6 +591,8 @@
           <NavigationProperty Name="User_Approve" Relationship="FYP.IT_DeskModel.FK_Tickets_Users" FromRole="Ticket" ToRole="User" />
           <NavigationProperty Name="User_Raised" Relationship="FYP.IT_DeskModel.FK_Tickets_Users1" FromRole="Ticket" ToRole="User" />
           <NavigationProperty Name="Ticket_Type" Relationship="FYP.IT_DeskModel.FK_Tickets_Ticket_Types" FromRole="Ticket" ToRole="Ticket_Types" />
+          <Property Name="Cancelled" Type="Boolean" Nullable="false" />
+          <Property Name="Cancelled_Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1085,25 +1089,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tickets">
-            <EntityTypeMapping TypeName="FYP.IT_DeskModel.Ticket">
-              <MappingFragment StoreEntitySet="Tickets">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Raised" ColumnName="Raised" />
-                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
-                <ScalarProperty Name="Completed_On" ColumnName="Completed_On" />
-                <ScalarProperty Name="Urgency_Id" ColumnName="Urgency_Id" />
-                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
-                <ScalarProperty Name="Raised_By" ColumnName="Raised_By" />
-                <ScalarProperty Name="Needs_Approval" ColumnName="Needs_Approval" />
-                <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
-                <ScalarProperty Name="Required_By" ColumnName="Required_By" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="FYP.IT_DeskModel.User">
               <MappingFragment StoreEntitySet="Users">
@@ -1150,6 +1135,27 @@
                 <ScalarProperty Name="Requires_Approval" ColumnName="Requires_Approval" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="IsTypeOf(FYP.IT_DeskModel.Ticket)">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="Cancelled_Reason" ColumnName="Cancelled_Reason" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+                <ScalarProperty Name="Required_By" ColumnName="Required_By" />
+                <ScalarProperty Name="Approved_By" ColumnName="Approved_By" />
+                <ScalarProperty Name="Needs_Approval" ColumnName="Needs_Approval" />
+                <ScalarProperty Name="Raised_By" ColumnName="Raised_By" />
+                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
+                <ScalarProperty Name="Urgency_Id" ColumnName="Urgency_Id" />
+                <ScalarProperty Name="Completed_On" ColumnName="Completed_On" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="Raised" ColumnName="Raised" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

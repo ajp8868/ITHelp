@@ -1,6 +1,12 @@
 ﻿@model ITHelp_Models.User
+@{ViewBag.Title = "Edit User";}
 @section Styles {
     <link href="@Url.Content("~/Content/Edit.css")" rel="stylesheet" type="text/css" />
+    <style>
+        .form-horizontal {
+            text-align: center;
+        }
+    </style>
 }
 @using (Html.BeginForm())
 {
@@ -13,10 +19,8 @@
             User Name: @Html.DisplayFor(model => model.User_Name)
         </div>
     </h2>
-    
+    <br/>
     <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -88,14 +92,14 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="btn form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn_save" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "users", null, new { @class = "btn btn_back" })
 </div>

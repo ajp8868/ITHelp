@@ -34,6 +34,8 @@ namespace ITHelp_Data_Service.Models
         public bool Needs_Approval { get; set; }
         public Nullable<int> Approved_By { get; set; }
         public System.DateTime Required_By { get; set; }
+        public bool Cancelled { get; set; }
+        public string Cancelled_Reason { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket_History> Ticket_History { get; set; }

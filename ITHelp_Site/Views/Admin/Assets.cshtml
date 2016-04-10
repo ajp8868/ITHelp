@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<ITHelp_Models.Asset>
-
+@{ViewBag.Title = "All Assets";}
 @section Styles {
     <link href="@Url.Content("~/Content/List.css")" rel="stylesheet" type="text/css" />
 }
 
     <h2>All Assets</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<br/>
 <table class="table">
+    <tr class="button">@Html.ActionLink("Create New", "assets/Create", null, new { @class = "btn btn_create" })</tr>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Type_Id)
@@ -48,7 +47,7 @@
         <td>
             @Html.ActionLink("Edit", "assets/Edit", new { id = item.Id }, new { @class = "btn btn_edit" })
             @Html.ActionLink("Details", "assets/Details", new { id = item.Id }, new { @class = "btn btn_details" })
-            @Html.ActionLink("Delete", "assets/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
+            @*@Html.ActionLink("Delete", "assets/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })*@
         </td>
     </tr>
 }

@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<ITHelp_Models.Knowledge>
+                      @{ViewBag.Title = "Knowledge-Base";}
 @section Styles {
     <link href="@Url.Content("~/Content/List.css")" rel="stylesheet" type="text/css" />
 }
+    <h2>Knowledge-Base</h2>
+    <br/>
 @{Html.RenderPartial("~/Views/Shared/SearchView.cshtml");}
 <table class="table">
     <tr>

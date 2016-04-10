@@ -21,6 +21,7 @@ textarea {
 
 .form-group {
     text-align: left;
+    min-height: 66px;
 }
 
 .form-group .form-control {

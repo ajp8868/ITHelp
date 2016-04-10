@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ITHelp_Models;
 using WebMatrix.WebData;
-using System.Net.Http;
+using ITHelp_Site.Filters;
 
+/*
+ * The Public controller for handling all requests made by a user in the viewer role.
+ * @author Adam Postgate - M2095821
+ * Email: ajp8868@aol.com
+ */
 namespace ITHelp_Site.Controllers
 {
+    [InitializeSimpleMembership]
+    [Authorize(Roles="viewer")]
     [RoutePrefix("public")]
     public class PublicController : Controller
     {
@@ -51,6 +52,7 @@ namespace ITHelp_Site.Controllers
 
         // GET: Public/Create
         [Route("tickets/create")]
+        [HttpGet]
         public ActionResult CreateTicket()
         {
             ViewData["types"] = sc.GetTickTypes();
@@ -84,18 +86,23 @@ namespace ITHelp_Site.Controllers
         }
 
         // GET: Public/Edit/5
-        [Route("tickets/edit")]
-        public async Task<ActionResult> EditTicket(int? id)
+        [Route("tickets/edit/{id}")]
+        [HttpGet]
+        public ActionResult EditTicket(int id)
         {
-            if (id == null)
+            if (id < 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = await db.Tickets.FindAsync(id);
+
+            Ticket ticket = sc.GetTicketByIdAsync(id);
+
             if (ticket == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.types = sc.GetTickTypes();
+            ViewBag.urgencies = sc.GetTickUrgencies();
             return View("TicketEdit", ticket);
         }
 
@@ -109,26 +116,51 @@ namespace ITHelp_Site.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ticket).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                await sc.PutTicketAsync(ticket).ConfigureAwait(false);
                 return RedirectToAction("Tickets");
             }
+            ViewBag.types = sc.GetTickTypes();
+            ViewBag.urgencies = sc.GetTickUrgencies();
             return View("TicketEdit", ticket);
         }
 
-        // GET: Public/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        // GET: public/tickets/cancel/5
+        [Route("tickets/cancel/{id}")]
+        [HttpGet]
+        public ActionResult CancelTicket(int id)
         {
-            if (id == null)
+            if (id < 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ticket ticket = await db.Tickets.FindAsync(id);
+
+            Ticket ticket = sc.GetTicketByIdAsync(id);
+
             if (ticket == null)
             {
                 return HttpNotFound();
             }
-            return View(ticket);
+
+            return View("TicketCancel", ticket);
+        }
+
+        // GET: public/asset/cancel/5
+        [Route("tickets/cancel/{id}")]
+        [HttpPost]
+        public ActionResult CancelTicketPut(int id)
+        {
+            Ticket ticket = sc.GetTicketByIdAsync(id);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+
+            ticket.Cancelled_Reason = Request["Cancelled_Reason"];
+            ticket.Cancelled = true;
+
+            var x = sc.PutTicketAsync(ticket).Result;
+
+            return RedirectToAction("tickets");
         }
 
 

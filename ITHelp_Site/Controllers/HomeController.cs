@@ -1,12 +1,14 @@
 ﻿using ITHelp_Site.Filters;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using WebMatrix.WebData;
 
+/*
+ * Auto generated home controller. Alterations have been made to redirect a user to the most relevant page on login.
+ * @author Adam Postgate - M2095821
+ * Email: ajp8868@aol.com
+ */
 namespace ITHelp_Site.Controllers
 {
     [InitializeSimpleMembership]

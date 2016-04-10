@@ -1,16 +1,20 @@
-﻿using System;
+﻿using DotNetOpenAuth.AspNet;
+using ITHelp_Models;
+using ITHelp_Site.Filters;
+using Microsoft.Web.WebPages.OAuth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using DotNetOpenAuth.AspNet;
-using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using ITHelp_Site.Filters;
-using ITHelp_Models;
 
+/*
+ * Auto generated account controller. I have altered the register to ensure it adds the user to the main database
+ * @author Adam Postgate - M2095821
+ * Email: ajp8868@aol.com
+ */
 namespace ITHelp_Site.Controllers
 {
     [Authorize]
@@ -33,7 +37,7 @@ namespace ITHelp_Site.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public ActionResult Login(User model, string returnUrl)
         {
             if (ModelState.IsValid && WebSecurity.Login(model.User_Name, model.Password, false))
             {
@@ -112,9 +116,9 @@ namespace ITHelp_Site.Controllers
 
                 var sc = new ServiceConnector();
 
-                var res = sc.PostUserAsync(model);
+                var res = sc.PostUserAsync(model).Result;
 
-                if (res.Result.IsSuccessStatusCode)
+                if (res.IsSuccessStatusCode)
                 {
 
                     try

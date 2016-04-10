@@ -1,4 +1,5 @@
 ﻿@model ITHelp_Models.Ticket
+@{ViewBag.Title = "Ticket Details";}
 @section Styles {
     <link href="@Url.Content("~/Content/Detail.css")" rel="stylesheet" type="text/css" />
 }
@@ -74,14 +75,14 @@
             <dd>
                @(Model.Needs_Approval == true ? "Yes":"No")
             </dd>
-            @if (Model.Needs_Approval == true)
+            @if (Model.Needs_Approval == false)
             { 
                 <dt>
                     @Html.DisplayNameFor(model => model.Approved_By)
                 </dt>
     
                 <dd>
-                    @Html.DisplayFor(model => model.Approved_By)
+                    @Html.DisplayFor(model => model.User_Approve.Name)
                 </dd>
             }
             <dt>

@@ -11,14 +11,17 @@ namespace ITHelp_Site
 {
     public class ServiceConnector
     {
+        //----------Globals------------//
+        
         private readonly string _baseUrl = "http://ithelpapi.azurewebsites.net/api/";
         //private readonly string _baseUrl = "http://localhost:50305/api/";
         
-        //Get all assets from the Repository Service
+        //---------------GETs----------------//
+
+        //Get all tickets from the Repository Service
         public List<Ticket> GetTicketsAsync(string ticketsUrl = "tickets")
         {
-            checkUrl(ticketsUrl);
-            var uri = _baseUrl + ticketsUrl;
+            var uri = checkUrl(ticketsUrl);
 
             using (var httpClient = new HttpClient())
             {
@@ -45,12 +48,11 @@ namespace ITHelp_Site
             }
         }
 
+        //gets all tickets filtered by the filter object
         public List<Ticket> GetTicketsWithParamsAsync(TicketFilter filter)
         {
-            var ticketsUrl = "tickets/filter";
-            checkUrl(ticketsUrl);
-            var uri = _baseUrl + ticketsUrl;
-
+            var uri = checkUrl("tickets/filter");
+            
             using (var httpClient = new HttpClient())
             {
                 List<Ticket> tickets = null;
@@ -76,14 +78,10 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all assets from the Repository Service
+        //Gets a ticket by ID
         public Ticket GetTicketByIdAsync(int id)
         {
-            var productUrl = "tickets/" + id;
-
-            checkUrl(productUrl);
-
-            var uri = _baseUrl + productUrl;
+            var uri = checkUrl("tickets/" + id.ToString());
 
             using (var httpClient = new HttpClient())
             {
@@ -110,14 +108,11 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all assets from the Repository Service
+        //Get all tickets by user from the database
         public List<Ticket> GetTicketsByUser(string username)
         {
-            var productUrl = "tickets/user/" + username;
 
-            checkUrl(productUrl);
-
-            var uri = _baseUrl + productUrl;
+            var uri = checkUrl("tickets/user/" + username);
 
             using (var httpClient = new HttpClient())
             {
@@ -147,9 +142,7 @@ namespace ITHelp_Site
         //Get all assets from the Repository Service
         public List<Asset> GetAssetsAsync(string assettUrl = "assets")
         {
-            checkUrl(assettUrl);
-
-            var uri = _baseUrl + assettUrl;
+            var uri = checkUrl(assettUrl);
 
             using (var httpClient = new HttpClient())
             {
@@ -176,12 +169,41 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all assets from the Repository Service
+        //Gets an asset by ID from the database
+        public Asset GetAssetById(int id)
+        {
+            var uri = checkUrl("assets/" + id.ToString());
+
+            using (var httpClient = new HttpClient())
+            {
+                Asset asset = null;
+
+                for (var i = 0; i <= 2; i++)
+                {
+                    try
+                    {
+                        asset = JsonConvert.DeserializeObject<Asset>(
+                            httpClient.GetStringAsync(uri).Result);
+                        Console.Out.WriteLine("Success getting Asset");
+                        i = 3;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Out.WriteLine("Problem Getting Asset. Attempt: " + (i + 1).ToString());
+                    }
+                }
+
+                httpClient.Dispose();
+
+                return asset;
+            }
+        }
+
+        //Get all users from the Repository Service
         public List<User> GetUsersAsync(string UsersUrl = "users")
         {
-            checkUrl(UsersUrl);
 
-            var uri = _baseUrl + UsersUrl;
+            var uri = checkUrl(UsersUrl);
 
             using (var httpClient = new HttpClient())
             {
@@ -208,12 +230,10 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all assets from the Repository Service
+        //Gets a user by username from the api service
         public User GetUserAsync(string username, string UsersUrl = "user")
         {
-            checkUrl(UsersUrl);
-
-            var uri = _baseUrl + UsersUrl + "/" + username;
+            var uri = checkUrl(UsersUrl + "/" + username);
 
             using (var httpClient = new HttpClient())
             {
@@ -240,12 +260,10 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all assets from the Repository Service
+        //Gets a user by ID from the database
         public User GetUserByIdAsync(int id, string UsersUrl = "user")
         {
-            checkUrl(UsersUrl);
-
-            var uri = _baseUrl + UsersUrl + "/id/" + id;
+            var uri = checkUrl(UsersUrl + "/id/" + id.ToString());
 
             using (var httpClient = new HttpClient())
             {
@@ -272,12 +290,11 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all assets from the Repository Service
+        //Gets ticket statuses from the api service
         public List<Ticket_Statuses> GetTickStatuses(string statusUrl = "tickets/statuses")
         {
 
-            checkUrl(statusUrl);
-            var uri = _baseUrl + statusUrl;
+            var uri = checkUrl(statusUrl);
 
             using (var httpClient = new HttpClient())
             {
@@ -304,12 +321,11 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all assets from the Repository Service
+        //Gets ticket types from the api service
         public List<Ticket_Types> GetTickTypes(string typesUrl = "tickets/types")
         {
 
-            checkUrl(typesUrl);
-            var uri = _baseUrl + typesUrl;
+            var uri = checkUrl(typesUrl);
 
             using (var httpClient = new HttpClient())
             {
@@ -336,12 +352,11 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all assets from the Repository Service
+        //Get ticket urgencies from the api service
         public List<Ticket_Urgencies> GetTickUrgencies(string urgenciesUrl = "tickets/urgencies")
         {
 
-            checkUrl(urgenciesUrl);
-            var uri = _baseUrl + urgenciesUrl;
+            var uri = checkUrl(urgenciesUrl);
 
             using (var httpClient = new HttpClient())
             {
@@ -368,62 +383,10 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all assets from the Repository Service
-        public async Task<HttpResponseMessage> PostUserAsync(User user, string usersUrl = "users")
-        {
-            checkUrl(usersUrl);
-
-            var uri = _baseUrl + usersUrl;
-
-            using (var client = new HttpClient())
-            {
-
-                var x = await client.PostAsJsonAsync(uri, user).ConfigureAwait(false);
-
-                return x;
-            }
-        }
-
-        //Get all assets from the Repository Service
-        public async Task<HttpResponseMessage> PostTicketAsync(Ticket ticket, string ticketUrl = "tickets")
-        {
-            checkUrl(ticketUrl);
-
-            var uri = _baseUrl + ticketUrl;
-
-            using (var client = new HttpClient())
-            {
-
-                var x = await client.PostAsJsonAsync(uri, ticket).ConfigureAwait(false);
-
-                return x;
-            }
-        }
-
-        //Get all assets from the Repository Service
-        public async Task<HttpResponseMessage> PutTicketAsync(Ticket ticket, string ticketUrl = "tickets")
-        {
-            checkUrl(ticketUrl);
-
-            var uri = _baseUrl + ticketUrl;
-
-            using (var client = new HttpClient())
-            {
-
-                var x = await client.PutAsJsonAsync(uri, ticket).ConfigureAwait(false);
-
-                return x;
-            }
-        }
-
-        //Get all Tickets from the Repository Service
+        //Get knowledge by ID from the database
         public Knowledge GetKnowledgeByIdAsync(int id)
         {
-            var knowledgeUrl = "knowledge/" + id;
-
-            checkUrl(knowledgeUrl);
-
-            var uri = _baseUrl + knowledgeUrl;
+            var uri = checkUrl("knowledge/" + id.ToString());
 
             using (var httpClient = new HttpClient())
             {
@@ -450,19 +413,15 @@ namespace ITHelp_Site
             }
         }
 
-        //Get all Tickets from the Repository Service
+        //Get all knowledge filtered using a search string if supplied
         public List<Knowledge> GetKnowledgeAsync(string search)
         {
-            var knowledgeUrl = "knowledge";
+            var uri = checkUrl("knowledge");
 
             if (search != null)
             {
-                knowledgeUrl += "?search=" + search.Replace(" ", "%20");
+                uri += "?search=" + search.Replace(" ", "%20");
             }
-
-            checkUrl(knowledgeUrl);
-
-            var uri = _baseUrl + knowledgeUrl;
 
             using (var httpClient = new HttpClient())
             {
@@ -489,14 +448,127 @@ namespace ITHelp_Site
             }
         }
 
+
+        //-------------PUTs----------------//
+
+        //updates a ticket in the database, using the api service
+        public async Task<HttpResponseMessage> PutTicketAsync(Ticket ticket, string ticketUrl = "tickets")
+        {
+            var uri = checkUrl(ticketUrl);
+
+            using (var client = new HttpClient())
+            {
+                var x = await client.PutAsJsonAsync(uri, ticket).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+        //updates a user in the database, using the api service
+        public async Task<HttpResponseMessage> PutUserAsync(User user, string usersUrl = "users")
+        {
+            var uri = checkUrl(usersUrl);
+
+            using (var client = new HttpClient())
+            {
+                var x = await client.PutAsJsonAsync(uri, user).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+        //updates a knowledge entity in the database, using the api service
+        public async Task<HttpResponseMessage> PutKnowledgeAsync(Knowledge knowledge, string knowledgeUrl = "knowledge")
+        {
+            var uri = checkUrl(knowledgeUrl);
+
+            using (var client = new HttpClient())
+            {
+                var x = await client.PutAsJsonAsync(uri, knowledge).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+        //updates an asset entity in the database, using the api service
+        public async Task<HttpResponseMessage> PutAssetAsync(Asset asset, string assetUrl = "assets")
+        {
+            var uri = checkUrl(assetUrl);
+
+            using (var client = new HttpClient())
+            {
+                var x = await client.PutAsJsonAsync(uri, asset).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+
+        //-----------------POSTs-----------------//
+
+        //adds a ticket to the database, using the api service
+        public async Task<HttpResponseMessage> PostTicketAsync(Ticket ticket, string ticketUrl = "tickets")
+        {
+            var uri = checkUrl(ticketUrl);
+
+            using (var client = new HttpClient())
+            {
+
+                var x = await client.PostAsJsonAsync(uri, ticket).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+        //adds a user to the database, using the api service
+        public async Task<HttpResponseMessage> PostUserAsync(User user, string usersUrl = "users")
+        {
+            var uri = checkUrl(usersUrl);
+
+            using (var client = new HttpClient())
+            {
+
+                var x = await client.PostAsJsonAsync(uri, user).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+
+
+        //adds a knowledge entity to the database, using the api service
+        public async Task<HttpResponseMessage> PostKnowledgeAsync(Knowledge knowledge, string knowledgeUrl = "knowledge")
+        {
+            var uri = checkUrl(knowledgeUrl);
+
+            using (var client = new HttpClient())
+            {
+
+                var x = await client.PostAsJsonAsync(uri, knowledge).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+        //inserts an asset entity into the database, using the api service
+        public async Task<HttpResponseMessage> PostAssetAsync(Asset asset, string assetUrl = "assets")
+        {
+            var uri = checkUrl(assetUrl);
+
+            using (var client = new HttpClient())
+            {
+                var x = await client.PostAsJsonAsync(uri, asset).ConfigureAwait(false);
+
+                return x;
+            }
+        }
+
+
+        //-----------Helper Methods----------------//
+
         private string checkUrl(string url)
         {
-            if (url.StartsWith("/"))
-            {
-                return url = url.Remove(0);
-            }
-
-            return url;
+             return _baseUrl + url.TrimStart('/');
         }
     }
 }

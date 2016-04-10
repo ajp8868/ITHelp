@@ -1,1 +1,22 @@
-﻿<h2>Welcome to Your User Space</h2>
+﻿@{ViewBag.Title = "Home";}
+@section Styles {
+    <link href="@Url.Content("~/Content/PublicIndex.css")" rel="stylesheet" type="text/css" />
+}
+<h2>Welcome @User.Identity.Name, to Your User Space</h2>
+<div id="linkContainer">
+    <a href="public/Tickets">
+        <div class="mainLink ticket">
+            <p>View &amp; Create Your Tickets</p>
+        </div>
+    </a>
+    <a href="public/knowledge">
+        <div class="mainLink knowledge">
+            <p>View &amp; Search the Knowledge-Base</p>
+        </div>
+    </a>
+    <a href="home/contact">
+        <div class="mainLink contact">
+            <p>Contact the IT Team</p>
+        </div>
+    </a>
+</div>

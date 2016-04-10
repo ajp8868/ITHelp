@@ -1,4 +1,5 @@
 ﻿@model ITHelp_Models.Ticket
+@{ViewBag.Title = "Edit a Ticket";}
 @section Styles {
     <link href="@Url.Content("~/Content/Edit.css")" rel="stylesheet" type="text/css" />
 }
@@ -116,5 +117,5 @@
     }
     
     <div>
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn_back" })
+        @Html.ActionLink("Back to List", "tickets", null, new { @class = "btn btn_back" })
     </div>

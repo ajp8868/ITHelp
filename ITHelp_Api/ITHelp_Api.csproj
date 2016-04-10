@@ -189,7 +189,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceConnector.cs" />
+    <Compile Include="Tools\ServiceConnector.cs" />
+    <Compile Include="Tools\AssetTools.cs" />
     <Compile Include="Tools\JsonTools.cs" />
     <Compile Include="Tools\KnowledgeTools.cs" />
     <Compile Include="Tools\UserTools.cs" />

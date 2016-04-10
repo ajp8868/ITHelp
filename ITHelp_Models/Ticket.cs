@@ -38,6 +38,8 @@ namespace ITHelp_Models
         [Required]
         [DisplayFormat(DataFormatString="{0:dd/MM/yyyy}")]
         public System.DateTime Required_By { get; set; }
+        public bool Cancelled { get; set; }
+        public String Cancelled_Reason { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket_History> Ticket_History { get; set; }

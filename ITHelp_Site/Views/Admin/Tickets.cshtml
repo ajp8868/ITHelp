@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<ITHelp_Models.Ticket>
-
+                      @{ViewBag.Title = "Tickets";}
     @section Styles {
         <link href="@Url.Content("~/Content/List.css")" rel="stylesheet" type="text/css" />
     }
@@ -74,7 +74,7 @@
                     <td class="end_row">
                         @Html.ActionLink("Edit", "tickets/edit", new { id = item.Id }, new { @class = "btn btn_edit" })
                         @Html.ActionLink("Details", "tickets/details", new { id = item.Id }, new { @class = "btn btn_details" })
-                        @Html.ActionLink("Delete", "tickets/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
+                        @*@Html.ActionLink("Delete", "tickets/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })*@
                     </td>
                 </tr>
             }

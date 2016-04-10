@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<ITHelp_Models.User>
+                      @{ViewBag.Title = "Users";}
 @section Styles {
     <link href="@Url.Content("~/Content/List.css")" rel="stylesheet" type="text/css" />
 }
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
     <table class="table">
+        <tr class="button">@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn_create" })</tr>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -57,7 +56,7 @@
             <td>
                 @Html.ActionLink("Edit", "users/Edit", new { id = item.Id }, new { @class = "btn btn_edit" }) 
                 @Html.ActionLink("Details", "users/Details", new { id = item.Id }, new { @class = "btn btn_details" }) 
-                @Html.ActionLink("Delete", "users/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })
+                @*@Html.ActionLink("Delete", "users/Delete", new { id = item.Id }, new { @class = "btn btn_delete" })*@
             </td>
         </tr>
     }

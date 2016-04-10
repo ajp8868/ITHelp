@@ -208,7 +208,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceConnector.cs" />
+    <Compile Include="Tools\ServiceConnector.cs" />
     <Compile Include="Tools\JsonTools.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +217,7 @@
     <Content Include="Content\Edit.css" />
     <Content Include="Content\Home.css" />
     <Content Include="Content\jquery.datetimepicker.css" />
+    <Content Include="Content\PublicIndex.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -253,9 +254,15 @@
     <Content Include="Content\List.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Resources\Images\assets.jpg" />
+    <Content Include="Resources\Images\contact.jpg" />
+    <Content Include="Resources\Images\error.jpeg" />
+    <Content Include="Resources\Images\Knowledge.jpg" />
     <Content Include="Resources\Images\Logo.png" />
     <Content Include="Resources\Images\Network Cables 2.jpg" />
     <Content Include="Resources\Images\Network Cables.jpg" />
+    <Content Include="Resources\Images\tickets.jpg" />
+    <Content Include="Resources\Images\users.jpg" />
     <Content Include="Scripts\DlhSoft.Data.DatePicker.Angular.Directives.js" />
     <Content Include="Scripts\DlhSoft.Data.DatePicker.HTML.Controls.js" />
     <None Include="Properties\PublishProfiles\ITHelpSite - FTP.pubxml" />
@@ -323,7 +330,7 @@
     <Content Include="Views\Admin\TicketEdit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Public\TicketCreate.cshtml" />
-    <Content Include="Views\Public\TicketDelete.cshtml" />
+    <Content Include="Views\Public\TicketCancel.cshtml" />
     <Content Include="Views\Public\TicketEdit.cshtml" />
     <Content Include="Views\Public\Index.cshtml" />
     <Content Include="Views\Admin\Tickets.cshtml" />
@@ -345,6 +352,10 @@
     <Content Include="Views\Shared\SearchView.cshtml" />
     <Content Include="Views\Admin\KnowledgeCreate.cshtml" />
     <Content Include="Views\Admin\KnowledgeEdit.cshtml" />
+    <Content Include="Views\Admin\AssetEdit.cshtml" />
+    <Content Include="Views\Admin\AssetDetails.cshtml" />
+    <Content Include="Views\Admin\AssetDelete.cshtml" />
+    <Content Include="Views\Admin\AssetCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

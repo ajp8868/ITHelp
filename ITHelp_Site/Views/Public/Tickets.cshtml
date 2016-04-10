@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ITHelp_Models.Ticket>
+@{ViewBag.Title = "Your Tickets";}
 
     @section Styles {
         <link href="@Url.Content("~/Content/List.css")" rel="stylesheet" type="text/css" />
@@ -73,7 +74,7 @@
                     }
                     else if (User.IsInRole("viewer"))
                     {
-                        @Html.ActionLink("Cancel", "public/cancel", new { id = item.Id }, new { @class = "btn btn_cancel" })
+                        @Html.ActionLink("Cancel", "tickets/cancel", new { id = item.Id }, new { @class = "btn btn_cancel" })
                     }
                 </td>
             </tr>

@@ -5,6 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
+/*
+ * All tools required for working with tickets. Adds filtering by id and user and other helpful methods
+ * @author Adam Postgate - M2095821
+ * Email: ajp8868@aol.com
+ */
 namespace ITHelp_Api.Tools
 {
     public class TicketTools

@@ -1,4 +1,34 @@
-﻿<body>
-    @Html.ActionLink("Tickets", "Tickets")   
-    @Html.ActionLink("User Management", "Users")
-</body>
+﻿@{ViewBag.Title = "Admin Home";}
+@section Styles {
+    <link href="@Url.Content("~/Content/PublicIndex.css")" rel="stylesheet" type="text/css" />
+}
+<h2>Welcome @User.Identity.Name</h2>
+<br />
+<h4>Select an Option to Begin</h4>
+<div id="linkContainer">
+    <a href="admin/Tickets">
+        <div class="mainLink ticket">
+            <p>View, Edit &amp; Create Tickets</p>
+        </div>
+    </a>
+    <a href="admin/knowledge">
+        <div class="mainLink knowledge">
+            <p>View &amp; Search Knowledge</p>
+        </div>
+    </a>
+    <a href="admin/users">
+        <div class="mainLink users">
+            <p>View &amp; Edit Users</p>
+        </div>
+    </a>
+    <a id ="hidden">
+        <div class="mainLink">
+            <p> </p>
+        </div>
+    </aid>
+    <a href="admin/assets" >
+        <div class="mainLink assets">
+            <p>View &amp; Edit Assets</p>
+        </div>
+    </a>
+    </div>

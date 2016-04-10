@@ -1,16 +1,17 @@
 ﻿@model ITHelp_Models.User
+@{ViewBag.Title = "User Details";}
 @section Styles {
     <link href="@Url.Content("~/Content/Detail.css")" rel="stylesheet" type="text/css" />
 }
-<div>
+<div style="text-align: center;">
     <h2 class="detailHeader">
     <div class="L1">
-        Editing User: @Html.DisplayFor(model => model.Name)
+        Showing User: @Html.DisplayFor(model => model.Name)
         <br />
         User Name: @Html.DisplayFor(model => model.User_Name)
     </div>
 </h2>
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="text-align: center;">
         <dt>
             @Html.DisplayNameFor(model => model.Enabled)
         </dt>
@@ -53,7 +54,7 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn_edit" })
-    @Html.ActionLink("Back to List", "Tickets", null, new { @class = "btn btn_back" })
+<p style="text-align: center;">
+    @Html.ActionLink("Edit", "users/Edit", new { id = Model.Id }, new { @class = "btn btn_edit" })
+    @Html.ActionLink("Back to List", "users", null, new { @class = "btn btn_back" })
 </p>

@@ -5,6 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+/*
+ * All methods required for working with knowledge
+ * @author Adam Postgate - M2095821
+ * Email: ajp8868@aol.com
+ */
 namespace ITHelp_Api.Tools
 {
     public class KnowledgeTools
@@ -39,7 +44,7 @@ namespace ITHelp_Api.Tools
                 }
             }
 
-            return toReturn;
+            return toReturn.Distinct().ToList();
         }
 
         public static Knowledge CheckById(int id, List<Knowledge> knowledge)

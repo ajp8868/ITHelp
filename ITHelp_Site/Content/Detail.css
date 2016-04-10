@@ -1,6 +1,7 @@
 ﻿.dl-horizontal {
     text-align: left;
     display: inline-block;
+    position: relative;
     width: 40%;
 }
 dd {
@@ -12,8 +13,8 @@ dd {
     clear: both;
 }
 dt {
-    display: block;
-    clear: both;
+    display: inline-block;
+    clear: left;
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 5px;
@@ -34,8 +35,8 @@ dt {
     font-size: 27px;
 }
 
-.ticketHistory, .ticketKeywords {
-    display:inline-block;
+.ticketHistory, .ticketKeywords, #keywords {
+    display:inline;
     width: 50%;
     float: right;
     margin-top: 20px;
@@ -71,3 +72,20 @@ dt {
 .btn_edit {
     background-color: darkseagreen;
 }
+
+.main-content .innerdiv {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.keyword {
+    font-size: 15px;
+    font-weight: bold;
+    background-color: lightblue;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 80%;
+    margin: 10px auto;
+    border-radius: 5px
+}
+

@@ -879,11 +879,11 @@ input.btn.btn_login_home {
     background-color: darkgoldenrod;
 }
 
-.btn_default {
+.btn_default, .btn-default {
     font-size: .85em !important;
     background-color: lightslategrey !important;
     min-height: 25px;
-    box-sizing: content-box;
+    box-sizing: border-box;
 }
 
 .btn_approve, .btn_save {

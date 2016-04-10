@@ -1,10 +1,10 @@
 ﻿@model ITHelp_Models.Knowledge
+@{ViewBag.Title = "Knowledge Details";}
 @section Styles {
     <link href="@Url.Content("~/Content/Detail.css")" rel="stylesheet" type="text/css" />
 }
+<h2>Knowledge Article: @Html.DisplayFor(model=>model.Title)</h2>
 <div>
-    <h4>Knowledge</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Title)
@@ -55,8 +55,17 @@
         </dd>
 
     </dl>
+    <div id="keywords">
+        <h3>Keywords</h3>
+        @foreach (var kw in Model.Knowledge_Keywords)
+        {
+            <div class="keyword">
+                @kw.Keyword.Keyword1
+            </div>
+        }
+    </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "knowledge/Edit", new { id = Model.Id }, new { @class = "btn btn_edit" })
+    @Html.ActionLink("Back to List", "knowledge", null, new { @class = "btn btn_back" })
 </p>

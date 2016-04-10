@@ -1,4 +1,7 @@
 ﻿@model ITHelp_Models.Ticket 
+@{ViewBag.Title = "Create Ticket";}
+<h2>Create Ticket</h2>
+<br/>
     @using (Html.BeginForm()) 
     {
         @Html.AntiForgeryToken()
@@ -62,5 +65,5 @@
     }
     
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn_back" })
     </div>

@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ITHelp_Models;
-using System.Web.Security;
 using WebMatrix.WebData;
+using ITHelp_Site.Filters;
+using Newtonsoft.Json;
 
+/*
+ * Admin controller for handling all requests made by a user in the Admin role.
+ * @author Adam Postgate - M2095821
+ * Email: ajp8868@aol.com
+ */
 namespace ITHelp_Site.Controllers
 {
+    [InitializeSimpleMembership]
     [RoutePrefix("admin")]
     [Authorize(Roles = "admin")]
     public class AdminController : Controller
@@ -25,6 +26,8 @@ namespace ITHelp_Site.Controllers
             return View();
         }
 
+     //---------------Users-------------------//
+
         // GET: Tickets
         [Route("users")]
         public ActionResult Users()
@@ -36,7 +39,29 @@ namespace ITHelp_Site.Controllers
         [Route("users/details/{id}")]
         public ActionResult UserDetails(int id)
         {
-            return View(sc.GetUserByIdAsync(id));
+            return View("UserDetails", sc.GetUserByIdAsync(id));
+        }
+
+        // GET: Edit/Tickets
+        [Route("users/edit/{id}")]
+        public ActionResult EditUser(int id)
+        {
+            return View("UserEdit", sc.GetUserByIdAsync(id));
+        }
+
+        [Route("users/edit/{id}")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditUser(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("UserEdit", user);
+            }
+
+            await sc.PostUserAsync(user).ConfigureAwait(false);
+
+            return RedirectToAction("users");
         }
 
         [Route("users")]
@@ -54,13 +79,6 @@ namespace ITHelp_Site.Controllers
                 }
             }
             return View(user);
-        }
-
-        // GET: Assets
-        [Route("assets")]
-        public ActionResult Assets()
-        {
-            return View(sc.GetAssetsAsync());
         }
 
 //--------------TICKETS----------------//
@@ -93,7 +111,7 @@ namespace ITHelp_Site.Controllers
             return View("TicketDetails", ticket);
         }
 
-        // GET: knowledge/Create
+        // GET: tickets/Create
         [Route("tickets/create")]
         [HttpGet]
         public ActionResult Create()
@@ -105,7 +123,7 @@ namespace ITHelp_Site.Controllers
             return View("TicketCreate");
         }
 
-        //POST: admin/knowledge/create
+        //POST: admin/tickets/create
         [Route("tickets/create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -174,6 +192,7 @@ namespace ITHelp_Site.Controllers
             {
                 return HttpNotFound();
             }
+            ticket.Approved_By = sc.GetUserAsync(User.Identity.Name).Id;
 
             return View("TicketApprove", ticket);
         }
@@ -181,11 +200,37 @@ namespace ITHelp_Site.Controllers
         //--------------Knowledge----------------//
 
         //GET: knowledge
-        [Route("knowledge{search}")]
+        [Route("knowledge")]
         [HttpGet]
-        public ActionResult Knowledge(string search)
+        public ActionResult Knowledge()
         {
+            string search = Request["search"];
             return View(sc.GetKnowledgeAsync(search));
+        }
+
+        //GET: knowledge
+        [Route("knowledge/create")]
+        [HttpGet]
+        public ActionResult CreateKnowledge()
+        {
+            return View("knowledgecreate");
+        }
+
+        //GET: knowledge
+        [Route("knowledge/create")]
+        [HttpPost]
+        public async Task<ActionResult> CreateKnowledge(Knowledge knowledge)
+        {
+            if (!ModelState.IsValid)
+            {
+                return HttpNotFound();
+            }
+
+            knowledge.Added_By = sc.GetUserAsync(User.Identity.Name).Id;
+
+            var result = await sc.PostKnowledgeAsync(knowledge).ConfigureAwait(false);
+
+            return RedirectToAction("knowledge");
         }
 
         // GET: Knowledge/Details/5
@@ -198,5 +243,86 @@ namespace ITHelp_Site.Controllers
             return View("KnowledgeView", knowledge);
         }
 
+        [Route("knowledge/edit/{id}")]
+        [HttpGet]
+        public ActionResult EditKnowledge(int id)
+        {
+            return View("knowledgeEdit", sc.GetKnowledgeByIdAsync(id));
+        }
+
+        [Route("knowledge/edit/{id}")]
+        [HttpPost]
+        public ActionResult EditKnowledge(Knowledge knowledge, int id)
+        {
+            var x = sc.PutKnowledgeAsync(knowledge).Result;
+
+            return View("knowledgeEdit");
+        }
+
+        //-------------Assets-------------------//
+
+        // GET: Assets
+        [Route("assets")]
+        public ActionResult Assets()
+        {
+            return View(sc.GetAssetsAsync());
+        }
+
+        // GET: Assets/edit
+        [Route("assets/edit/{id}")]
+        public ActionResult EditAsset(int id)
+        {
+            return View("AssetEdit", sc.GetAssetById(id));
+        }
+
+        // GET: Assets
+        [Route("assets/edit/{id}")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<ActionResult> Assets(Asset asset)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("AssetEdit", asset);
+            }
+
+            return View(await sc.PutAssetAsync(asset).ConfigureAwait(false));
+        }
+
+        [Route("assets/details/{id}")]
+        public ActionResult Assets(int id)
+        {
+            var item = sc.GetAssetById(id);
+
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("assetDetails", item);
+        }
+
+        // GET: Assets/create
+        [Route("assets/create")]
+        public ActionResult CreateAsset()
+        {
+            return View("AssetCreate");
+        }
+
+        // POST: Asset
+        [Route("assets/create")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<ActionResult> Create(Asset asset)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("AssetCreate", asset);
+            }
+
+            await sc.PostAssetAsync(asset).ConfigureAwait(false);
+
+            return RedirectToAction("assets");
+        }
     }
 }
